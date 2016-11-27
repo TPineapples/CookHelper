@@ -18,7 +18,7 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        final DatabaseHelper helper = MainActivity.helper;
         Button registerUser = (Button) findViewById(R.id.buttonSubmit);
         final EditText username = (EditText) findViewById(R.id.fieldUsername);
         final EditText password = (EditText) findViewById(R.id.fieldPassword);
@@ -46,10 +46,15 @@ public class Register extends AppCompatActivity {
                         everything.startAnimation(shake);
                     } else {
                         Login newUser = new Login(user, pass);
-                        Intent i = new Intent();
-                        i.putExtra("USERINFO", newUser);
-                        setResult(666, i);
-                        finish();
+                        if(!helper.addLogin(newUser)){
+                            Toast.makeText(Register.this, "Couldn't make new account... Maybe it already exists", Toast.LENGTH_SHORT).show();
+                            Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+                            LinearLayout everything = (LinearLayout) findViewById(R.id.viewContent);
+                            everything.startAnimation(shake);
+                        } else {
+                            Toast.makeText(Register.this, "Successfully added " + newUser.getUser_Name(), Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
                     }
                 }
 

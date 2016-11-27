@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText username, password;
     Button newAccount, submitLogin;
-    DatabaseHelper helper;
+    public static DatabaseHelper helper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("x000: Attempting default login registration");
         Login temp = new Login();
         helper.addLogin(temp);
-        System.out.println(helper.IsValidLogin("Default"));
+        System.out.println(helper.IsValidLogin("Default", "Password1"));
 
         final EditText username = (EditText) findViewById(R.id.fieldUsername);
         final EditText password = (EditText) findViewById(R.id.fieldPassword);
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     everything.startAnimation(shake);
                 } else {
                     Login temp = helper.getLoginFromUsername(user);
-                    if(helper.IsValidLogin(user)){
+                    if(helper.IsValidLogin(user,pass)){
                         if (pass.equals(temp.getPassword())) {
                             Toast.makeText(MainActivity.this, "Welcome Back " + user, Toast.LENGTH_SHORT).show();
                             //USERMENU ACTIVITY INTENT HERE
@@ -71,26 +71,10 @@ public class MainActivity extends AppCompatActivity {
         newAccount.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent i = new Intent(MainActivity.this, Register.class);
-                startActivityForResult(i, 1);
+                startActivity(i);
             }
         });
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == 1) {
-            if (resultCode == 666) {
-                System.out.println("x111");
-                Login newUser = data.getParcelableExtra("USERINFO");
-                System.out.println("NEWUSER: " + newUser);
-                if(!helper.addLogin(newUser)){
-                    Toast.makeText(this, "Couldn't make new account... Maybe it already exists", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(this, "Successfully added " + newUser.getUser_Name(), Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        }
-    }
 }
