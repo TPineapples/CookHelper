@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("x000: Attempting default login registration");
         Login temp = new Login();
         helper.addLogin(temp);
+        System.out.println(helper.IsValidLogin("Default"));
 
         final EditText username = (EditText) findViewById(R.id.fieldUsername);
         final EditText password = (EditText) findViewById(R.id.fieldPassword);
