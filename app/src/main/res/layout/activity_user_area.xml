@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="ad.nerdsqu.cookhelper.UserAreaActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="130dp"
+            android:id="@+id/imageView2"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/chefhelperlogo" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Search For Recipe"
+                android:id="@+id/bSearchForRecipe"
+                android:layout_marginTop="42dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add a Recipe"
+                android:id="@+id/bAddARecipe"
+                android:layout_marginTop="24dp"
+                android:layout_below="@+id/bMySavedRecipes"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignRight="@+id/bMySavedRecipes"
+                android:layout_alignEnd="@+id/bMySavedRecipes" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="My Saved Recipes"
+                android:id="@+id/bMySavedRecipes"
+                android:layout_below="@+id/bSearchForRecipe"
+                android:layout_alignLeft="@+id/bSearchForRecipe"
+                android:layout_alignStart="@+id/bSearchForRecipe"
+                android:layout_marginTop="23dp"
+                android:layout_alignRight="@+id/bSearchForRecipe"
+                android:layout_alignEnd="@+id/bSearchForRecipe" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="My Account"
+                android:id="@+id/bMyAccount"
+                android:layout_marginTop="30dp"
+                android:layout_below="@+id/bAddARecipe"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignRight="@+id/bAddARecipe"
+                android:layout_alignEnd="@+id/bAddARecipe" />
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

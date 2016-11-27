@@ -15,7 +15,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Register"></activity>
+        <activity android:name=".Register" />
+        <activity android:name=".MyAccountActivity"></activity>
+        <activity android:name=".UserAreaActivity"></activity>
+        <activity android:name=".SavedRecipesActivity"></activity>
+        <activity android:name=".SearchRecipeActivity"></activity>
+        <activity
+            android:name=".AddRecipeActivity"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
     </application>
 
 </manifest>

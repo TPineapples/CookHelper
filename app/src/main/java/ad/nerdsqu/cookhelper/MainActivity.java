@@ -14,8 +14,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText username, password;
-    Button newAccount, submitLogin;
     DatabaseHelper helper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     if (helper.IsValidLogin(user, pass)) {
                         Toast.makeText(MainActivity.this, "Welcome Back " + user, Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(MainActivity.this, UserAreaActivity.class);
+                        i.putExtra("USER", user);
+
+                        startActivity(i);
                     } else {
                         Toast.makeText(MainActivity.this, "Wrong username or password. Please try again", Toast.LENGTH_SHORT).show();
                         Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);

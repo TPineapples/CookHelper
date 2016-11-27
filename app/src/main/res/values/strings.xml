@@ -1,3 +1,148 @@
 <resources>
+
     <string name="app_name">CookHelper</string>
+
+
+    <string-array name="food_category">
+
+        <item>Indian</item>
+
+        <item>Italian</item>
+
+        <item>Chinese</item>
+
+        <item>All</item>
+
+    </string-array>
+
+
+    <string-array name="food_type">
+
+        <item>Breakfast</item>
+
+        <item>Lunch</item>
+
+        <item>Dinner</item>
+
+        <item>Dessert</item>
+
+        <item>Snack</item>
+
+        <item>Any</item>
+
+    </string-array>
+
+
+    <!-- Ingredients -->
+
+    <string-array name="ingredients_names">
+
+        <item>Butter</item>
+
+        <item>Onion</item>
+
+        <item>Garlic</item>
+
+        <item>Heavy Cream</item>
+
+
+    </string-array>
+
+
+    <!-- Ingredient Photos -->
+
+    <array name="ingredients_photos">
+
+        <item>@drawable/salt</item>
+
+        <item>@drawable/sugar</item>
+
+        <item>@drawable/oliveoil</item>
+
+    </array>
+
+
+    <!-- Directions -->
+
+    <string-array name="directions_names">
+
+        <item>Preheat oven to 375 degrees F (190 degrees C).</item>
+
+        <item>Melt a few tablespoons of butter in a skillet over medium heat. Stir in onion and garlic, and cook slowly until the onion caramelizes to a dark brown, about 15 minutes.</item>
+
+        <item>Meanwhile melt the remaining butter in a saucepan over medium-high heat along with the tomato sauce, heavy cream, salt, cayenne pepper, and garam masala. Bring to a simmer, then reduce heat to medium-low; cover, and simmer for 30 minutes, stirring occasionally. Then stir in caramelized onions.</item>
+
+    </string-array>
+
+
+    <!-- Ingredient Photos -->
+
+    <array name="directions_photos">
+
+        <item>@drawable/one</item>
+
+        <item>@drawable/two</item>
+
+        <item>@drawable/two</item>
+
+    </array>
+
+
+    <!-- Search Items names -->
+
+    <string-array name="search_names">
+
+        <item>Salmon</item>
+
+        <item>Chicken Stew</item>
+
+        <item>Pancakes</item>
+
+        <item>Salad</item>
+
+        <item>Tacos</item>
+
+        <item>Pizza</item>
+
+
+    </string-array>
+
+
+    <!-- Search Items Photos -->
+
+    <array name="search_photos">
+
+        <item>@drawable/salmon</item>
+
+        <item>@drawable/chickenstew</item>
+
+        <item>@drawable/pancakes</item>
+
+        <item>@drawable/salad</item>
+
+        <item>@drawable/tacos</item>
+
+        <item>@drawable/pizza</item>
+
+    </array>
+    <string name="title_activity_saved_recipes">SavedRecipesActivity</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="viewRecipe">View Recipe</string>
+    <string name="clearSearch">Clear Search</string>
+    <string name="findRecipe">Find A Recipe</string>
+    <string name="category">Select A Category</string>
+    <string name="type">Select Type:</string>
+    <string name="enterIngredients">Enter the ingredients that you have</string>
+    <string name="account">Account Info:</string>
+    <string name="accountUsername">Username:</string>
+    <string name="changePassword">Change Password:</string>
+    <string name="OldPassword">Enter Old Password:</string>
+    <string name="newPassword">Enter New Password:</string>
+    <string name="reenter_password">Reenter New Password:</string>
+    <string name="confirmChange">Confirm New Password</string>>
+
+
 </resources>

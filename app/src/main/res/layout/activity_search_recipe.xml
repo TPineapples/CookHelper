@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="ad.nerdsqu.cookhelper.SearchRecipeActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Find a Recipe"
+        android:id="@+id/tvFindARecipe"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:hint="Enter the ingredients that you have"
+        android:layout_below="@+id/tvFindARecipe"
+        android:layout_centerHorizontal="true" />
+    
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinCategory"
+        android:entries="@array/food_category"
+        android:spinnerMode="dropdown"
+        android:layout_below="@+id/editText"
+        android:layout_alignLeft="@+id/tvFindARecipe"
+        android:layout_alignStart="@+id/tvFindARecipe"
+        android:layout_marginLeft="69dp"
+        android:layout_marginStart="69dp">
+    </Spinner>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Select Category:"
+        android:id="@+id/tvRecipeList"
+        android:layout_alignBottom="@+id/spinCategory"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinType"
+        android:entries="@array/food_type"
+        android:spinnerMode="dropdown"
+        android:layout_below="@+id/tvRecipeList"
+        android:layout_alignLeft="@+id/spinCategory"
+        android:layout_alignStart="@+id/spinCategory">
+    </Spinner>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Select Type:"
+        android:id="@+id/textView3"
+        android:layout_alignBottom="@+id/spinType"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="385px"
+        android:id="@+id/lvSearchRecipe"
+        android:layout_below="@+id/spinType"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/button" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Recipe"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/spinType"
+        android:layout_alignStart="@+id/spinType" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear Search"
+        android:id="@+id/button2"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/button"
+        android:layout_toStartOf="@+id/button" />
+
+</RelativeLayout>

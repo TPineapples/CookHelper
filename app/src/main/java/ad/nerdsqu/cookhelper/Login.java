@@ -32,8 +32,8 @@ public class Login implements Parcelable {
     }
 
     public Login() {
-        User_Name = "Default";
-        Password = "Password1";
+        User_Name = "A";
+        Password = "a";
     }
 
 
@@ -49,7 +49,7 @@ public class Login implements Parcelable {
         User_Name = new_User_Name;
     }
 
-    public void setLogin_Name(String new_Password){
+    public void setPassword(String new_Password){
         Password = new_Password;
     }
 
