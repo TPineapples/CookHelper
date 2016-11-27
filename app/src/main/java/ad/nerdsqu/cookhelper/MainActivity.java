@@ -77,7 +77,12 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("x111");
                 Login newUser = data.getParcelableExtra("USERINFO");
                 System.out.println("NEWUSER: " + newUser);
-                helper.addLogin(newUser);
+                if(!helper.addLogin(newUser)){
+                    Toast.makeText(this, "Couldn't make new account... Maybe it already exists", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Successfully added " + newUser.getUser_Name(), Toast.LENGTH_SHORT).show();
+                }
+
             }
         }
     }
