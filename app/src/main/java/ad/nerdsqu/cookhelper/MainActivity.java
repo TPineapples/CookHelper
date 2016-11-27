@@ -47,9 +47,18 @@ public class MainActivity extends AppCompatActivity {
                     everything.startAnimation(shake);
                 } else {
                     Login temp = helper.getLoginFromUsername(user);
-
-                    if (pass.equals(temp.getPassword())) {
-                        Toast.makeText(MainActivity.this, "Welcome Back " + user, Toast.LENGTH_SHORT).show();
+                    if(helper.IsValidLogin(user)){
+                        if (pass.equals(temp.getPassword())) {
+                            Toast.makeText(MainActivity.this, "Welcome Back " + user, Toast.LENGTH_SHORT).show();
+                            //USERMENU ACTIVITY INTENT HERE
+                            Intent i = new Intent(MainActivity.this, UserScreen.class);
+                            startActivity(i);
+                        } else {
+                            Toast.makeText(MainActivity.this, "Wrong username or password. Please try again", Toast.LENGTH_SHORT).show();
+                            Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+                            LinearLayout everything = (LinearLayout) findViewById(R.id.viewContent);
+                            everything.startAnimation(shake);
+                        }
                     } else {
                         Toast.makeText(MainActivity.this, "Wrong username or password. Please try again", Toast.LENGTH_SHORT).show();
                         Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
