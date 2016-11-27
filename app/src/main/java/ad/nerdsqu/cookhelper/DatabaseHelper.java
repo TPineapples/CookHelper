@@ -1,16 +1,18 @@
 package ad.nerdsqu.cookhelper;
+import android.content.Context;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Set;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.content.ContentValues;
 
-        import android.content.Context;
-        import java.util.ArrayList;
-        import java.util.List;
-        import java.util.ListIterator;
-
-        import android.database.Cursor;
-        import android.database.sqlite.SQLiteConstraintException;
-        import android.database.sqlite.SQLiteDatabase;
-        import android.database.sqlite.SQLiteOpenHelper;
-        import android.util.Log;
-        import android.content.ContentValues;
 /**
  * Created by James on 2016-11-14.
  */
@@ -125,20 +127,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean IsValidLogin(String UserName) {
+    public boolean IsValidLogin(String UserName, String Password) {
 
         SQLiteDatabase Db = this.getWritableDatabase();
 
         String QueryString = "Select Password FROM Login_Table WHERE User_Names = ?";
         Cursor c = Db.rawQuery(QueryString, new String[]{UserName});
 
-        if (c.getCount()!=0) {
-            return true;
-        } else {
+        if (c.getCount() == 0) {
             return false;
+        } else {
+            c.moveToFirst();
+            if (c.getString(0).equals(Password)) {
+                return true;
+            } else {
+                return false;
+            }
         }
-
-
     }
 
 
@@ -203,8 +208,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public List<Login> getAllLogins() {
-        List<Login> AllLogins = new ArrayList<Login>();
+    public ArrayList<Login> getAllLogins() {
+        ArrayList<Login> AllLogins = new ArrayList<Login>();
 
         String selectQuery = "SELECT  * FROM " + TABLE1_NAME;
 
@@ -223,8 +228,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return AllLogins;
     }
 
-    public List<Recipe> getAllRecipes() {
-        List<Recipe> AllRecipes = new ArrayList<Recipe>();
+    public ArrayList<Recipe> getAllRecipes() {
+        ArrayList<Recipe> AllRecipes = new ArrayList<Recipe>();
         String selectQuery = "SELECT  * FROM " + TABLE2_NAME;
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -245,7 +250,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
 
-        return AllRecipes;
+        return SortRecipeList(AllRecipes);
 
     }
 
@@ -264,7 +269,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public List<Recipe> searchBySingleIngredient(String Ingredient) {
+    public ArrayList<Recipe> searchBySingleIngredient(String Ingredient) {
         ArrayList<Recipe> AllRecipes = (ArrayList<Recipe>) getAllRecipes();
         ArrayList<Recipe> ReturnedRecipes = new ArrayList<Recipe>();
 
@@ -278,12 +283,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
 
-        return ReturnedRecipes;
+        return SortRecipeList(ReturnedRecipes);
 
     }
 
 
-    public List<Recipe> searchByMultipleIngredients(String[] RequiredIngredients) {
+    public ArrayList<Recipe> searchByMultipleIngredients(String[] RequiredIngredients) {
         ArrayList<Recipe> AllRecipes = (ArrayList<Recipe>) getAllRecipes();
         ArrayList<Recipe> ReturnedRecipes = new ArrayList<Recipe>();
 
@@ -302,12 +307,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         }
-        return ReturnedRecipes;
+        return SortRecipeList(ReturnedRecipes);
 
     }
 
 
-    public List<Recipe> searchByCategory(String Category) {
+    public ArrayList<Recipe> searchByCategory(String Category) {
 
 
         SQLiteDatabase Db = this.getWritableDatabase();
@@ -329,10 +334,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         }
 
-        return CategoryRecipes;
+        return SortRecipeList(CategoryRecipes);
     }
 
-    public List<Recipe> searchByType(String Type) {
+    public ArrayList<Recipe> searchByType(String Type) {
 
 
         SQLiteDatabase Db = this.getWritableDatabase();
@@ -355,15 +360,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         }
 
-        return CategoryRecipes;
+        return SortRecipeList(CategoryRecipes);
     }
 
-    public List<Recipe> GeneralSearch(String Category, String Type, String[] Ingredients) {
+    public ArrayList<Recipe> GeneralSearch(String Category, String Type, String[] Ingredients) {
 
-        List<Recipe> List1 = searchByMultipleIngredients(Ingredients);
-        List<Recipe> List2 = searchByCategory(Category);
-        List<Recipe> List3 = searchByType(Type);
-        List<Recipe> returnList = new ArrayList<Recipe>();
+        ArrayList<Recipe> List1 = searchByMultipleIngredients(Ingredients);
+        ArrayList<Recipe> List2 = searchByCategory(Category);
+        ArrayList<Recipe> List3 = searchByType(Type);
+        ArrayList<Recipe> returnList = new ArrayList<Recipe>();
         ListIterator<Recipe> it1 = List1.listIterator();
 
 
@@ -395,8 +400,140 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         }
-        return returnList;
+        return SortRecipeList(returnList);
     }
+
+
+
+    public String[] getAllCategories() {
+        List<Recipe> RecipeList = getAllRecipes();
+        Set<String> StringList = new HashSet<String>();
+        ListIterator<Recipe> it = RecipeList.listIterator();
+        while (it.hasNext()) {
+            StringList.add(it.next().getCategory());
+
+        }
+        String[] CategoryStrings = new String[StringList.size()];
+        Iterator it2 = StringList.iterator();
+        int counter = 0;
+        while (it2.hasNext()){
+            CategoryStrings[counter] = (String)it2.next();
+            counter++;
+        }
+        return sortStringArray(CategoryStrings);
+    }
+
+
+    public String[] getAllTypes() {
+        ArrayList<Recipe> RecipeList = getAllRecipes();
+        Set<String> StringList = new HashSet<String>();
+        ListIterator<Recipe> it = RecipeList.listIterator();
+        while (it.hasNext()) {
+            StringList.add(it.next().getRecipe_Type());
+
+        }
+        String[] TypeStrings = new String[StringList.size()];
+        Iterator it2 = StringList.iterator();
+        int counter = 0;
+        while (it2.hasNext()){
+            TypeStrings[counter] = (String)it2.next();
+            counter++;
+        }
+        return sortStringArray(TypeStrings);
+    }
+
+
+    public String[] getAllIngredients() {
+        List<Recipe> RecipeList = getAllRecipes();
+        Set<String> StringList = new HashSet<String>();
+        ListIterator<Recipe> it = RecipeList.listIterator();
+        while (it.hasNext()) {
+            String[] RecipeList2 = it.next().getIngredients();
+            for (int i = 0; i < RecipeList2.length; i++) {
+                StringList.add(RecipeList2[i]);
+            }
+
+        }
+        String[] IngredientStrings = new String[StringList.size()];
+        Iterator it2 = StringList.iterator();
+        int counter = 0;
+        while (it2.hasNext()){
+
+            IngredientStrings[counter] = (String)it2.next();
+            counter++;
+        }
+        return sortStringArray(IngredientStrings);
+    }
+
+
+
+
+
+
+    public  String[] sortStringArray(String[] ArrayToSort) {
+
+
+
+
+
+        for(int j=0; j<ArrayToSort.length;j++)
+        {
+            for (int i=j+1 ; i<ArrayToSort.length; i++)
+            {
+                if(ArrayToSort[i].compareTo(ArrayToSort[j])<0)
+                {
+                    String temp= ArrayToSort[j];
+                    ArrayToSort[j]= ArrayToSort[i];
+                    ArrayToSort[i]=temp;
+
+
+                }
+            }
+
+
+        }
+
+        return ArrayToSort;
+    }
+
+
+
+    public ArrayList<Recipe> SortRecipeList (ArrayList<Recipe> unSortedList) {
+
+        Recipe[] unSortedRecipeArray = new Recipe[unSortedList.size()];
+
+        for (int i = 0; i < unSortedList.size(); i++) {
+            unSortedRecipeArray[i] = unSortedList.get(i);
+
+        }
+
+        for(int j=0; j<unSortedRecipeArray.length;j++)
+        {
+            for (int i=j+1 ; i<unSortedRecipeArray.length; i++)
+            {
+                if (unSortedRecipeArray[i].getRecipeName().compareTo(unSortedRecipeArray[j+1].getRecipeName()) < 0)
+                {
+                    Recipe temp = unSortedRecipeArray[j];
+                    unSortedRecipeArray[j]= unSortedRecipeArray[i];
+                    unSortedRecipeArray[i]=temp;
+
+
+                }
+            }
+
+
+        }
+
+        ArrayList<Recipe> SortedRecipeList = new ArrayList<Recipe>();
+        for (int i = 0; i < unSortedRecipeArray.length; i++) {
+            SortedRecipeList.add(unSortedRecipeArray[i]);
+        }
+
+        return SortedRecipeList;
+    }
+
+
+
 
 
     public void printAllLogins() {
@@ -419,4 +556,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
     }
+
 }

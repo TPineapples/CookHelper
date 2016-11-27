@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("x000: Attempting default login registration");
         Login temp = new Login();
         helper.addLogin(temp);
-        System.out.println(helper.IsValidLogin("Default"));
+        System.out.println(helper.IsValidLogin("Default", "Password1"));
 
         final EditText username = (EditText) findViewById(R.id.fieldUsername);
         final EditText password = (EditText) findViewById(R.id.fieldPassword);
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                     LinearLayout everything = (LinearLayout) findViewById(R.id.viewContent);
                     everything.startAnimation(shake);
                 } else {
-                    if (pass.equals(helper.IsValidLogin(user))) {
+                    if (helper.IsValidLogin(user, pass)) {
                         Toast.makeText(MainActivity.this, "Welcome Back " + user, Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity.this, "Wrong username or password. Please try again", Toast.LENGTH_SHORT).show();
