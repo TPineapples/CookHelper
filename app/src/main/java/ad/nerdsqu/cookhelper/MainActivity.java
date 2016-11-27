@@ -46,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
                     LinearLayout everything = (LinearLayout) findViewById(R.id.viewContent);
                     everything.startAnimation(shake);
                 } else {
-                    if (pass.equals(helper.IsValidLogin(user))) {
+                    Login temp = helper.getLoginFromUsername(user);
+
+                    if (pass.equals(temp.getPassword())) {
                         Toast.makeText(MainActivity.this, "Welcome Back " + user, Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity.this, "Wrong username or password. Please try again", Toast.LENGTH_SHORT).show();
