@@ -16,7 +16,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Register" />
-        <activity android:name=".UserScreen"></activity>
     </application>
 
 </manifest>
