@@ -138,7 +138,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         } else {
             c.moveToFirst();
-            if (c.getString(0).equals(Password)) {
+            String p = c.getString(0);
+            if (p.equals(Password)) {
                 return true;
             } else {
                 return false;
@@ -164,7 +165,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
     }
-
+    public void setPassword (String pass,String user){
+        SQLiteDatabase Db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("Password", pass);
+        Db.update("Login_Table", cv, TABLE1_COL1 + "= ?", new String[] {user});
+    }
 
     public boolean isRecipeInDatabase(String RecipeName) {
 

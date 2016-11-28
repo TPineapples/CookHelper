@@ -142,7 +142,8 @@
     <string name="OldPassword">Enter Old Password:</string>
     <string name="newPassword">Enter New Password:</string>
     <string name="reenter_password">Reenter New Password:</string>
-    <string name="confirmChange">Confirm New Password</string>>
+    <string name="confirmChange">Confirm New Password</string>
+    <string name="listRecipeName">Recipe Name</string>>
 
 
 </resources>

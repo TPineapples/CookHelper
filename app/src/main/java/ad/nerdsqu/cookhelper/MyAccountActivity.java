@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MyAccountActivity extends AppCompatActivity {
-    DatabaseHelper helper;
+
     String user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +30,13 @@ public class MyAccountActivity extends AppCompatActivity {
                 EditText new_password1_text = (EditText)findViewById(R.id.new_password1);
                 EditText new_password2_text = (EditText)findViewById(R.id.new_password2);
 
-                String old_pass = old_password_text.toString();
-                String new_pass1 = new_password1_text.toString();
-                String new_pass2 = new_password2_text.toString();
+                String old_pass = old_password_text.getText().toString();
+                String new_pass1 = new_password1_text.getText().toString();
+                String new_pass2 = new_password2_text.getText().toString();
 
-                if (helper.IsValidLogin(user,old_pass)) {
+                if (MainActivity.helper.IsValidLogin(user, old_pass)) {
                     if (new_pass1.equals(new_pass2)) {
-                        helper.getLoginFromUsername(user).setPassword(new_pass1);
+                        MainActivity.helper.setPassword(new_pass1,user);
                         Toast.makeText(MyAccountActivity.this, "Success!", Toast.LENGTH_SHORT).show();
 
                         old_password_text.setText("");
