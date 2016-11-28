@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/buttonRegister"
                 android:layout_weight="0.11"
-                android:background="@color/colorAccent"
+                android:background="@color/accent_material_light"
                 android:textColor="@android:color/background_light"
                 android:textStyle="normal|bold" />
 

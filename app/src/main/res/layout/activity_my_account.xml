@@ -27,7 +27,7 @@
             android:textSize="30sp"
             android:textAllCaps="false"
             android:textAlignment="center"
-            android:textColor="@android:color/holo_red_light"
+            android:textColor="?android:attr/textColorPrimary"
             android:layout_weight="1"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
