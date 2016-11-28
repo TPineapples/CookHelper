@@ -3,12 +3,15 @@ package ad.nerdsqu.cookhelper;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -30,6 +33,19 @@ public class MainActivity extends AppCompatActivity {
         final EditText password = (EditText) findViewById(R.id.fieldPassword);
         Button newAccount = (Button) findViewById(R.id.buttonRegister);
         Button submitLogin = (Button) findViewById(R.id.buttonLogin);
+        TextView buttonHelp = (TextView) findViewById(R.id.linkHelp);
+
+        SpannableString helpstyling = new SpannableString(getString(R.string.HelpLink));
+        helpstyling.setSpan(new UnderlineSpan(), 0, helpstyling.length(), 0);
+        buttonHelp.setText(helpstyling);
+
+        buttonHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, HelpLoginActivity.class);
+                startActivity(i);
+            }
+        });
 
         submitLogin.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -64,21 +80,10 @@ public class MainActivity extends AppCompatActivity {
         newAccount.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent i = new Intent(MainActivity.this, Register.class);
-                startActivityForResult(i, 1);
+                startActivity(i);
             }
         });
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == 1) {
-            if (resultCode == 666) {
-                System.out.println("x111");
-                Login newUser = data.getParcelableExtra("USERINFO");
-                System.out.println("NEWUSER: " + newUser);
-                helper.addLogin(newUser);
-            }
-        }
-    }
 }

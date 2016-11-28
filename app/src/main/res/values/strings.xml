@@ -143,6 +143,15 @@
     <string name="newPassword">Enter New Password:</string>
     <string name="reenter_password">Reenter New Password:</string>
     <string name="confirmChange">Confirm New Password</string>
+    <string name="HelpLink">Help</string>
+    <string name="HelpLink2">\@string/HelpLink</string>
+    <string name="Help_main">Help - Login / Registration</string>
+    <string name="Help_main_s1">Login</string>
+    <string name="Help_main_s1_data">In order to access your recipes you must first log-in to your account. Enter your username in the first field aptly title \"Username\". Afterwards enter your password into the second field titled \"Password\". Once you have entered the correct credentials you will gain access to your user pages where you can view/create/edit recipes, and change your password.</string>
+    <string name="Help_main_s2">Registration</string>
+    <string name="Help_main_s2_data">In order to be able to login to your account you must first register for an account. Click on the green button labeled Registration. It will take you to a window with three text boxes and a button. In the first textbox title \"Username\", enter your desired username. This will be used to uniquely identify users. In the second field titled \"Password\", enter your desired password. In the third field titled \"Re-type Password\" enter the same password you typed eariler. This step is to ensure you properly typed your password. Once you are happy with your credentials click the green \"Submit\" button. If everything goes correctly you will be able to login with the credentials you just saved.</string>
+    >
+    <string name="confirmChange">Confirm New Password</string>
     <string name="listRecipeName">Recipe Name</string>>
 
 

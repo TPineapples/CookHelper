@@ -66,8 +66,21 @@
             android:layout_height="wrap_content"
             android:id="@+id/buttonSubmit"
             android:textColor="@android:color/background_light"
-            android:background="@color/colorAccent"
+            android:background="@color/accent_material_light"
             android:textStyle="normal|bold" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linkHelp"
+            android:layout_weight="0.11"
+            android:layout_marginTop="24dp"
+            tools:text="@string/HelpLink"
+            android:textAlignment="center"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/accent_material_light" />
+
 
     </LinearLayout>
 </RelativeLayout>

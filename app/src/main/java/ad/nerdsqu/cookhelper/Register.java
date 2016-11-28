@@ -4,25 +4,42 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Register extends AppCompatActivity {
-
+    DatabaseHelper helper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        helper = MainActivity.helper;
 
         Button registerUser = (Button) findViewById(R.id.buttonSubmit);
         final EditText username = (EditText) findViewById(R.id.fieldUsername);
         final EditText password = (EditText) findViewById(R.id.fieldPassword);
         final EditText passwordConfirm = (EditText) findViewById(R.id.fieldPasswordConfirmation);
+        TextView buttonHelp = (TextView) findViewById(R.id.linkHelp);
+
+        SpannableString helpstyling = new SpannableString(getString(R.string.HelpLink));
+        helpstyling.setSpan(new UnderlineSpan(), 0, helpstyling.length(), 0);
+        buttonHelp.setText(helpstyling);
+
+        buttonHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Register.this, HelpLoginActivity.class);
+                startActivity(i);
+            }
+        });
 
         registerUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,10 +63,15 @@ public class Register extends AppCompatActivity {
                         everything.startAnimation(shake);
                     } else {
                         Login newUser = new Login(user, pass);
-                        Intent i = new Intent();
-                        i.putExtra("USERINFO", newUser);
-                        setResult(666, i);
-                        finish();
+                        if(!helper.addLogin(newUser)){
+                            Toast.makeText(Register.this, "Username already exists", Toast.LENGTH_SHORT).show();
+                            Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+                            LinearLayout everything = (LinearLayout) findViewById(R.id.viewContent);
+                            everything.startAnimation(shake);
+                        } else {
+                            Toast.makeText(Register.this, "Successfully added " + user, Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
                     }
                 }
 

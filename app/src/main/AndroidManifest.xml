@@ -7,7 +7,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/CookTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,10 +16,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".Register" />
-        <activity android:name=".MyAccountActivity"></activity>
-        <activity android:name=".UserAreaActivity"></activity>
-        <activity android:name=".SavedRecipesActivity"></activity>
-        <activity android:name=".SearchRecipeActivity"></activity>
+        <activity android:name=".MyAccountActivity" />
+        <activity android:name=".UserAreaActivity" />
+        <activity android:name=".SavedRecipesActivity" />
+        <activity android:name=".SearchRecipeActivity" />
         <activity
             android:name=".AddRecipeActivity"
             android:windowSoftInputMode="adjustResize">
