@@ -17,6 +17,7 @@
         </activity>
         <activity android:name=".Register" />
         <activity android:name=".MyAccountActivity" />
+        <activity android:name=".HelpLoginActivity"/>
         <activity android:name=".UserAreaActivity" />
         <activity android:name=".SavedRecipesActivity" />
         <activity android:name=".SearchRecipeActivity" />
