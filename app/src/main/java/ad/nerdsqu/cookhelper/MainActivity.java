@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    DatabaseHelper helper;
+    static DatabaseHelper helper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,21 +64,10 @@ public class MainActivity extends AppCompatActivity {
         newAccount.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent i = new Intent(MainActivity.this, Register.class);
-                startActivityForResult(i, 1);
+                startActivity(i);
             }
         });
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == 1) {
-            if (resultCode == 666) {
-                System.out.println("x111");
-                Login newUser = data.getParcelableExtra("USERINFO");
-                System.out.println("NEWUSER: " + newUser);
-                helper.addLogin(newUser);
-            }
-        }
-    }
 }
