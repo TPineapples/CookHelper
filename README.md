@@ -2,14 +2,17 @@
 (This itself are contents of the top level dir "CookHelper" so on your local drive it should look like C:\AndroidProjects\CookHelper ...  or instead of C wherever your AndroidProjects are stored)
 
 ##TODO
-* [ ] Add activites(.java) and their respective layouts(.xml) to the project
+* [x] Add activites(.java) and their respective layouts(.xml) to the project
 * [ ] Link @jamesdickens 's code (the database stuff for login and recipes) to the activites in order to retrieve and display data
-* [ ] Add our own recipes to the list ???
-* [ ] Make things prettier ???
+* [x] Add our own recipes to the list ???
+* [x] Make things prettier ???
 * [ ] Get everyone on this git repo
 * [ ] Fix-up/add stuff to this TODO and readme
-* [ ] Have Fun
-
+* [x] Have Fun
+* [ ] Check for invalid inputs in most recent activities
+* [ ] Add missing fields to add recipe activity
+* [ ] Add buttons to search activity for searching by ex. category, type
+ 
 ##TA's Checklist
 -All members present
 -Add a recipe

@@ -19,7 +19,7 @@ public class SavedRecipesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_recipes);
-        final ListView listview = (ListView)findViewById(R.id.saved_list);
+        final ListView listview = (ListView)findViewById(R.id.lvSavedList);
         final ArrayList<String> values = new ArrayList<String>();
         ArrayList<Recipe> recipes = MainActivity.helper.getAllRecipes();
 

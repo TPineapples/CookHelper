@@ -1,19 +1,20 @@
 package ad.nerdsqu.cookhelper;
-import android.content.Context;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Set;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteConstraintException;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-import android.content.ContentValues;
 
-/**
+        import android.content.Context;
+        import java.util.ArrayList;
+        import java.util.HashSet;
+        import java.util.Iterator;
+        import java.util.List;
+        import java.util.ListIterator;
+        import java.util.Set;
+        import android.database.Cursor;
+        import android.database.sqlite.SQLiteConstraintException;
+        import android.database.sqlite.SQLiteDatabase;
+        import android.database.sqlite.SQLiteOpenHelper;
+        import android.util.Log;
+        import android.content.ContentValues;
+
+        /**
  * Created by James on 2016-11-14.
  */
 
@@ -69,7 +70,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public void DeleteBothTables () {
+    public void DeleteBothTables() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + TABLE1_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE2_NAME);
@@ -77,7 +78,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CreateTable2String);
     }
 
-    public void DeleteRecipeTableValuesAndRemake(){
+    public void DeleteRecipeTableValuesAndRemake() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + TABLE2_NAME);
         db.execSQL(CreateTable2String);
@@ -138,8 +139,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         } else {
             c.moveToFirst();
-            String p = c.getString(0);
-            if (p.equals(Password)) {
+            if (c.getString(0).equals(Password)) {
                 return true;
             } else {
                 return false;
@@ -155,7 +155,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor c = Db.rawQuery(QueryString, new String[]{UserName});
 
 
-        if (c.getCount()==0) {
+        if (c.getCount() == 0) {
             return null;
         } else {
             System.out.println(c.getCount());
@@ -165,12 +165,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
     }
-    public void setPassword (String pass,String user){
-        SQLiteDatabase Db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put("Password", pass);
-        Db.update("Login_Table", cv, TABLE1_COL1 + "= ?", new String[] {user});
-    }
+
 
     public boolean isRecipeInDatabase(String RecipeName) {
 
@@ -178,7 +173,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String QueryString = "Select Password FROM Recipe_Table WHERE Recipe_Name = ?";
         Cursor c = Db.rawQuery(QueryString, new String[]{RecipeName});
 
-        if (c.getCount()==0) {
+        if (c.getCount() == 0) {
             return false;
         } else {
             return true;
@@ -195,22 +190,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String QueryString = "Select * FROM Recipe_Table WHERE Recipe_Name = ?";
         Cursor c = Db.rawQuery(QueryString, new String[]{RecipeName});
 
-        if (c.getCount()==0) {
+        if (c.getCount() == 0) {
             return null;
         } else {
             c.moveToFirst();
 
-            String[] Ingredients = Recipe.IngredientsStringToArray(c.getString(1));
-            String Preparation_Time = c.getString(2);
-            String Cook_Time = c.getString(3);
-            String Category = c.getString(4);
-            String Recipe_Type = c.getString(5);
-            String Directions = c.getString(6);
-            Recipe recipe = new Recipe(RecipeName, Ingredients, Cook_Time, Preparation_Time, Category, Recipe_Type, Directions);
+
+            String[] ingredients = formatString(Recipe.IngredientsStringToArray(c.getString(1)));
+
+
+            String preparation_Time = c.getString(2);
+            String cook_Time = c.getString(3);
+            String category = c.getString(4);
+            String recipe_Type = c.getString(5);
+            String directions = c.getString(6);
+            Recipe recipe = new Recipe(RecipeName, ingredients, cook_Time, preparation_Time, category, recipe_Type, directions);
             return recipe;
 
         }
 
+    }
+    //removing : delimiters and formatting ingredients as: <amount> <ingredient>
+    //instead of <ingredient>:<amount>
+    private String[] formatString(String[] list) {
+        ArrayList<String> formattedList = new ArrayList<String>();
+        String[] splits;
+        String temp = "";
+
+        for (String item : list) {
+            splits = item.split(":");
+            for (int i = 0; i < splits.length; i++) {
+                temp = temp + " " + splits[i];
+            }
+            formattedList.add(temp.substring(1)); //remove leading space
+            temp = "";
+        }
+        return formattedList.toArray(list);
     }
 
 
@@ -264,8 +279,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean IsIngredientInArray(String Ingredient, String[] Ingredients) {
 
         for (int i = 0; i < Ingredients.length; i++) {
+            String Ingredient1 = delimitRecipeString(Ingredient)[0];
+            if ((delimitRecipeString(Ingredients[i])[0]).toLowerCase().contains(Ingredient1.toLowerCase())) {
 
-            if (Ingredient.equals(Ingredients[i])) {
                 return true;
             }
 
@@ -325,7 +341,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String QueryString = "Select * FROM Recipe_Table WHERE Category = ?";
         Cursor c = Db.rawQuery(QueryString, new String[]{Category});
         ArrayList<Recipe> CategoryRecipes = new ArrayList<Recipe>();
-        if (c.getCount()==0) {
+        if (c.getCount() == 0) {
             return null;
         } else {
             c.moveToFirst();
@@ -350,7 +366,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String QueryString = "Select * FROM Recipe_Table WHERE Type = ?";
         Cursor c = Db.rawQuery(QueryString, new String[]{Type});
         ArrayList<Recipe> CategoryRecipes = new ArrayList<Recipe>();
-        if (c.getCount()==0) {
+        if (c.getCount() == 0) {
             return null;
         } else {
             c.moveToFirst();
@@ -410,7 +426,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-
     public String[] getAllCategories() {
         List<Recipe> RecipeList = getAllRecipes();
         Set<String> StringList = new HashSet<String>();
@@ -422,8 +437,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] CategoryStrings = new String[StringList.size()];
         Iterator it2 = StringList.iterator();
         int counter = 0;
-        while (it2.hasNext()){
-            CategoryStrings[counter] = (String)it2.next();
+        while (it2.hasNext()) {
+            CategoryStrings[counter] = (String) it2.next();
             counter++;
         }
         return sortStringArray(CategoryStrings);
@@ -441,8 +456,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] TypeStrings = new String[StringList.size()];
         Iterator it2 = StringList.iterator();
         int counter = 0;
-        while (it2.hasNext()){
-            TypeStrings[counter] = (String)it2.next();
+        while (it2.hasNext()) {
+            TypeStrings[counter] = (String) it2.next();
             counter++;
         }
         return sortStringArray(TypeStrings);
@@ -463,34 +478,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] IngredientStrings = new String[StringList.size()];
         Iterator it2 = StringList.iterator();
         int counter = 0;
-        while (it2.hasNext()){
+        while (it2.hasNext()) {
 
-            IngredientStrings[counter] = (String)it2.next();
+            IngredientStrings[counter] = delimitRecipeString((String) it2.next())[0];
             counter++;
         }
         return sortStringArray(IngredientStrings);
     }
 
 
+    public String[] sortStringArray(String[] ArrayToSort) {
 
 
-
-
-    public  String[] sortStringArray(String[] ArrayToSort) {
-
-
-
-
-
-        for(int j=0; j<ArrayToSort.length;j++)
-        {
-            for (int i=j+1 ; i<ArrayToSort.length; i++)
-            {
-                if(ArrayToSort[i].compareTo(ArrayToSort[j])<0)
-                {
-                    String temp= ArrayToSort[j];
-                    ArrayToSort[j]= ArrayToSort[i];
-                    ArrayToSort[i]=temp;
+        for (int j = 0; j < ArrayToSort.length; j++) {
+            for (int i = j + 1; i < ArrayToSort.length; i++) {
+                if (ArrayToSort[i].compareTo(ArrayToSort[j]) < 0) {
+                    String temp = ArrayToSort[j];
+                    ArrayToSort[j] = ArrayToSort[i];
+                    ArrayToSort[i] = temp;
 
 
                 }
@@ -503,8 +508,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-
-    public ArrayList<Recipe> SortRecipeList (ArrayList<Recipe> unSortedList) {
+    public ArrayList<Recipe> SortRecipeList(ArrayList<Recipe> unSortedList) {
 
         Recipe[] unSortedRecipeArray = new Recipe[unSortedList.size()];
 
@@ -513,15 +517,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         }
 
-        for(int j=0; j<unSortedRecipeArray.length;j++)
-        {
-            for (int i=j+1 ; i<unSortedRecipeArray.length; i++)
-            {
-                if (unSortedRecipeArray[i].getRecipeName().compareTo(unSortedRecipeArray[j+1].getRecipeName()) < 0)
-                {
+        for (int j = 0; j < unSortedRecipeArray.length; j++) {
+            for (int i = j + 1; i < unSortedRecipeArray.length; i++) {
+                if (unSortedRecipeArray[i].getRecipeName().compareTo(unSortedRecipeArray[j + 1].getRecipeName()) < 0) {
                     Recipe temp = unSortedRecipeArray[j];
-                    unSortedRecipeArray[j]= unSortedRecipeArray[i];
-                    unSortedRecipeArray[i]=temp;
+                    unSortedRecipeArray[j] = unSortedRecipeArray[i];
+                    unSortedRecipeArray[i] = temp;
 
 
                 }
@@ -539,28 +540,59 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-
-
-
     public void printAllLogins() {
         List<Login> allLogins = getAllLogins();
         ListIterator<Login> it = allLogins.listIterator();
         while (it.hasNext()) {
-            System.out.println( it.next().toString());
+            System.out.println(it.next().toString());
         }
 
 
     }
-
 
 
     public void printAllRecipes() {
         List<Recipe> allRecipes = getAllRecipes();
         ListIterator<Recipe> it = allRecipes.listIterator();
-        while (it.hasNext()){
+        while (it.hasNext()) {
             System.out.println(it.next().toString());
         }
 
     }
 
+    public String[] delimitRecipeString(String recipe) {
+        String[] sA = recipe.split(":");
+        return sA;
+
+
+    }
+
+
+    public void editRecipe(Recipe recipe) {
+        SQLiteDatabase Db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(TABLE2_COL1, recipe.getRecipeName());
+        String ConcatenatedIngredients = recipe.ConcatenateIngredientNames();
+        values.put(TABLE2_COL2, ConcatenatedIngredients);
+        values.put(TABLE2_COL3, recipe.getPreparation_Time());
+        values.put(TABLE2_COL4, recipe.getCook_Time());
+        values.put(TABLE2_COL5, recipe.getCategory());
+        values.put(TABLE2_COL6, recipe.getRecipe_Type());
+        values.put(TABLE2_COL7, recipe.getDirections());
+        Db.update(TABLE2_NAME, values, TABLE2_COL1+ "=?", new String[]{recipe.getRecipeName()});
+    }
+
+    public void setPassword (String pass,String user){
+        SQLiteDatabase Db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("Password", pass);
+        Db.update("Login_Table", cv, TABLE1_COL1 + "= ?", new String[] {user});
+    }
 }
+
+
+
+
+
+
+

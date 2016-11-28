@@ -24,7 +24,8 @@
             android:name=".AddRecipeActivity"
             android:windowSoftInputMode="adjustResize">
         </activity>
-        <activity android:name=".RecipeActivity"></activity>
+        <activity android:name=".RecipeActivity"/>
+        <activity android:name=".ViewDirectionsActivity"/>
     </application>
 
 </manifest>

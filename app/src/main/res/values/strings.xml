@@ -107,6 +107,25 @@
 
     </string-array>
 
+    <string-array name="unit_measurement">
+
+        <item></item>
+
+        <item>g</item>
+
+        <item>kg</item>
+
+        <item>mL</item>
+
+        <item>L</item>
+
+        <item>tsp(s)</item>
+
+        <item>Tbsp(s)</item>
+
+        <item>C</item>
+
+    </string-array>
 
     <!-- Search Items Photos -->
 
@@ -151,8 +170,19 @@
     <string name="Help_main_s2">Registration</string>
     <string name="Help_main_s2_data">In order to be able to login to your account you must first register for an account. Click on the green button labeled Registration. It will take you to a window with three text boxes and a button. In the first textbox title \"Username\", enter your desired username. This will be used to uniquely identify users. In the second field titled \"Password\", enter your desired password. In the third field titled \"Re-type Password\" enter the same password you typed eariler. This step is to ensure you properly typed your password. Once you are happy with your credentials click the green \"Submit\" button. If everything goes correctly you will be able to login with the credentials you just saved.</string>
     >
-    <string name="confirmChange">Confirm New Password</string>
-    <string name="listRecipeName">Recipe Name</string>>
+    <string name="listRecipeName">Recipe Name</string>
+    <string name="enterRecipeSteps">Enter the steps to prepare the recipe...</string>
+    <string name="cookTime">Cook Time:</string>
+    <string name="totalTime">Total Time:</string>
+    <string name="calories">Calories:</string>
+    <string name="foodCategory">Food Category:</string>
+    <string name="foodType">Food Type:</string>
+    <string name="prepTime">Prep Time:</string>
+    <string name="quantity">Quantity</string>
+    <string name="ingredient">Ingredient</string>
+    <string name="directions">Directions (Press Here for Fullscreen)</string>
+    <string name="serach">Search</string>
+    <string name="addIngredient">Add Ingredient</string>>
 
 
 </resources>
