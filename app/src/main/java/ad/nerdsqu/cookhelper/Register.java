@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Register extends AppCompatActivity {
@@ -24,6 +27,19 @@ public class Register extends AppCompatActivity {
         final EditText username = (EditText) findViewById(R.id.fieldUsername);
         final EditText password = (EditText) findViewById(R.id.fieldPassword);
         final EditText passwordConfirm = (EditText) findViewById(R.id.fieldPasswordConfirmation);
+        TextView buttonHelp = (TextView) findViewById(R.id.linkHelp);
+
+        SpannableString helpstyling = new SpannableString(getString(R.string.HelpLink));
+        helpstyling.setSpan(new UnderlineSpan(), 0, helpstyling.length(), 0);
+        buttonHelp.setText(helpstyling);
+
+        buttonHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Register.this, HelpLoginActivity.class);
+                startActivity(i);
+            }
+        });
 
         registerUser.setOnClickListener(new View.OnClickListener() {
             @Override
