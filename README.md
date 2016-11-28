@@ -12,6 +12,7 @@
 * [ ] Check for invalid inputs in most recent activities
 * [ ] Add missing fields to add recipe activity
 * [ ] Add buttons to search activity for searching by ex. category, type
+* [ ] Create complete UML diagram for final report using SimpleUML in Android Studio
  
 ##TA's Checklist
 -All members present
