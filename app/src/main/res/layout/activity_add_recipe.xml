@@ -53,12 +53,12 @@
             <EditText
                 android:layout_width="49dp"
                 android:layout_height="wrap_content"
-                android:inputType="number"
                 android:ems="10"
                 android:id="@+id/etQuantity"
                 android:hint="Quantity"
                 android:gravity="center_horizontal"
-                android:layout_weight="0.45" />
+                android:layout_weight="0.45"
+                android:inputType="number|numberDecimal" />
 
             <Spinner
                 android:layout_width="wrap_content"

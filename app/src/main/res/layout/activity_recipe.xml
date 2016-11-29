@@ -26,7 +26,12 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
-            android:textColor="@android:color/holo_red_light" />
+            android:textColor="@android:color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
 
         <TableLayout
             android:layout_width="match_parent"

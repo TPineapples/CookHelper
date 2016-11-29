@@ -174,7 +174,9 @@ public class AddRecipeActivity extends AppCompatActivity {
 
                 } else {
                     MainActivity.helper.addRecipe(recipe);
-                    Toast.makeText(AddRecipeActivity.this, "Successfully Added Recipe", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddRecipeActivity.this, "Recipe Added", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(AddRecipeActivity.this, UserAreaActivity.class);
+                    startActivity(i);
                 }
             }
         });
