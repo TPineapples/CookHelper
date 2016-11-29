@@ -20,10 +20,12 @@
         <activity android:name=".HelpLoginActivity"/>
         <activity android:name=".UserAreaActivity" />
         <activity android:name=".SavedRecipesActivity" />
-        <activity android:name=".SearchRecipeActivity" />
+        <activity
+            android:name=".SearchRecipeActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".AddRecipeActivity"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustPan|adjustResize">
         </activity>
         <activity android:name=".RecipeActivity"/>
         <activity android:name=".ViewDirectionsActivity"/>

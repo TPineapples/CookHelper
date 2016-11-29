@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
     android:weightSum="1"
+    android:scrollbarStyle="insideOverlay"
+    android:fillViewport="true">
+
+
+    <LinearLayout
+
     android:id="@+id/iDUnits"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    app:layout_scrollFlags="scroll">
 
     <Space
         android:layout_width="match_parent"
@@ -23,9 +35,8 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.03" />
+        android:layout_height="30dp" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -36,57 +47,66 @@
         android:background="@drawable/drawable_rectangle">
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:weightSum="1">
+            android:layout_height="match_parent">
 
-            <EditText
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:weightSum="1">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.52"
+                    android:hint="@string/ingredient"
+                    android:gravity="center_horizontal"
+                    android:id="@+id/etIngredient" />
+
+
+                <EditText
+                    android:layout_width="49dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/etQuantity"
+                    android:hint="@string/quantity"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="0.53" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/unit_measurement"
+                    android:id="@+id/unitSpinner" />
+
+            </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.52"
-                android:hint="@string/ingredient"
-                android:gravity="center_horizontal"
-                android:id="@+id/etIngredient" />
+                android:layout_weight="0.52" />
 
-
-            <EditText
-                android:layout_width="49dp"
+            <Button
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/etQuantity"
-                android:hint="@string/quantity"
-                android:gravity="center_horizontal"
-                android:layout_weight="0.53" />
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/unit_measurement"
-                android:id="@+id/unitSpinner" />
+                android:id="@+id/bAddIngredient"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_weight="0.01"
+                android:text="@string/addIngredient" />
 
         </LinearLayout>
 
-        <Space
-            android:layout_width="351dp"
-            android:layout_height="55dp" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/bAddIngredient"
-            android:layout_gravity="center_horizontal|bottom"
-            android:layout_weight="0.01"
-            android:text="@string/addIngredient" />
 
     </FrameLayout>
 
-    <Space
+        <Space
         android:layout_width="373dp"
-        android:layout_height="20px"
-        android:layout_weight="0.15" />
+            android:layout_weight="0.15"
+            android:layout_height="30dp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -117,8 +137,8 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="20px"
-        android:layout_weight="0.15" />
+        android:layout_weight="0.15"
+        android:layout_height="20dp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -148,17 +168,11 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.01" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.15" />
-
-    <EditText
+        <EditText
         android:layout_width="372dp"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
@@ -170,16 +184,21 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.17" />
 
-    <LinearLayout
+        <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.14">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <Button
             android:layout_width="wrap_content"
@@ -189,4 +208,11 @@
 
     </LinearLayout>
 
-</LinearLayout>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.15"
+            android:layout_height="300dp" />
+
+    </LinearLayout>
+</ScrollView>
