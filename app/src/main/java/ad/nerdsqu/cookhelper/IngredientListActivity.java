@@ -14,12 +14,12 @@ import java.util.ArrayList;
 
 
 public class IngredientListActivity extends AppCompatActivity {
-    private ArrayList<String> ingredients;
+    private ArrayList<String> ingredients = new ArrayList<>();
     private String[] ingredArray;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipe_list);
+        setContentView(R.layout.activity_ingredient_list);
         ListView listview = (ListView)findViewById(R.id.lvSavedList);
 
 
@@ -29,8 +29,13 @@ public class IngredientListActivity extends AppCompatActivity {
         //add array to arrayList changing formatting from <ingredient>:<amount>
         //to <amount> <ingredient>
         for (String ingr : ingredArray) {
-            split = ingr.split(":");
-            ingredients.add(split[1] + " " + split[0]);
+            if (ingr.contains(":")) {
+                split = ingr.split(":");
+                ingredients.add(split[1] + " " + split[0]);
+            } else {
+                ingredients.add(ingr);
+            }
+
         }
 
 
@@ -40,6 +45,7 @@ public class IngredientListActivity extends AppCompatActivity {
         listview.setAdapter(itemsAdapter);
 
 
+        //remove long pressed ingredient from ingredients AND ingredArray to preserve formatting
         listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -56,14 +62,15 @@ public class IngredientListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent back = new Intent();
 
-                ArrayList<String> temp = new ArrayList<>();
-
+                //clears the ingredients and repopulates from array, ignoring empty ("deleted") Strings
+                //used to preserve String formatting of ingredArray
+                ingredients.clear();
                 for (String ingred : ingredArray) {
-                    if (!ingred.equals(""))  temp.add(ingred);
+                    if (!ingred.equals(""))  ingredients.add(ingred);
                 }
 
-                String[] updatedIngr = new String[temp.size()];
-                updatedIngr = temp.toArray(updatedIngr);
+                String[] updatedIngr = new String[ingredients.size()];
+                updatedIngr = ingredients.toArray(updatedIngr);
 
                 back.putExtra("INGREDIENT_LIST", updatedIngr);
                 setResult(RESULT_OK, back);

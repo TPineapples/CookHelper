@@ -24,8 +24,6 @@ public class RecipeActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_recipe);
 
-            ImageView recipeImage = (ImageView)findViewById(R.id.ivRecipeImage);
-
             TextView prep = (TextView)findViewById(R.id.tvPrepTime);
             TextView cook = (TextView)findViewById(R.id.tvCookTime);
             TextView total = (TextView)findViewById(R.id.tvTotalTime);
@@ -41,8 +39,6 @@ public class RecipeActivity extends AppCompatActivity {
             String recipeName = getIntent().getStringExtra("RECIPE_NAME");
             recipe = MainActivity.helper.getRecipeFromName(recipeName);
 
-            //TODO get image from database
-            recipeImage.setImageResource(R.drawable.butterchicken);
 
             //calculate total time by splitting the string (<xx> minutes)
             //to extract the leading int <xx>

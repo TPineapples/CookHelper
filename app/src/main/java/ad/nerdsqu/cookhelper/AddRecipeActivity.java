@@ -35,7 +35,7 @@ public class AddRecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_recipe);
 
-        //TODO
+
         name = (EditText)findViewById(R.id.etRecipeName);
         cookTime = (EditText)findViewById(R.id.etCookTime);
         prepTime = (EditText)findViewById(R.id.etPrepTime);
@@ -46,11 +46,20 @@ public class AddRecipeActivity extends AppCompatActivity {
 
         unit = (Spinner)findViewById(R.id.unitSpinner);
         category = (Spinner)findViewById(R.id.categorySpinner);
-        type = (Spinner)findViewById(R.id.typeSpinnerAdd);
+        type = (Spinner)findViewById(R.id.typeSpinner);
+
+        addRecipe = (Button)findViewById(R.id.bAddRecipe);
+
+
+
+        /*A test to see if the activity is being passed an existing recipe to edit.
+         *TRUE -> load all fields with recipe's info, change title and button text to
+         *        reflect behaviour (eg "Add recipe" -> "Update recipe")*/
 
         if (getIntent().hasExtra("RECIPE_NAME")) {
             Recipe recipe = MainActivity.helper.getRecipeFromName
                     (getIntent().getStringExtra("RECIPE_NAME"));
+
 
             addRecipe.setText(R.string.updateRecipe);
             TextView title = (TextView)findViewById(R.id.tvAddRecipeTitle);
@@ -82,6 +91,9 @@ public class AddRecipeActivity extends AppCompatActivity {
 
         }
 
+        final String origName = name.getText().toString();
+
+        //check for clicks on directions TextView to open a separate text input activity
         directions.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent getDirections = new Intent(AddRecipeActivity.this, EnterTextActivity.class);
@@ -123,8 +135,10 @@ public class AddRecipeActivity extends AppCompatActivity {
         addRecipe = (Button) findViewById(R.id.bAddRecipe);
         addRecipe.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                //helper used to check for nulls and replace with empty string
                 StringHelper help = new StringHelper();
                 Recipe recipe;
+
                 String rCategory = help.getSpinnerString(category);
                 String rType = help.getSpinnerString(type);
                 String rName = help.getEditTextString(name);
@@ -139,7 +153,28 @@ public class AddRecipeActivity extends AppCompatActivity {
                 recipe = new Recipe(rName, ingredArray, rPrepTime, rCookTime,
                                                         rCategory, rType, rDirections);
 
-                MainActivity.helper.addRecipe(recipe);
+                //another check to see if it is altering a recipe or creating a new one
+                //TRUE -> editing
+                if (getIntent().hasExtra("RECIPE_NAME")) {
+
+
+                    if (!origName.equals(rName)) {
+                        MainActivity.helper.deleteRecipeFromName(origName);
+                    } else {
+                        MainActivity.helper.deleteRecipeFromName(recipe.getRecipeName());
+                    }
+
+
+                    MainActivity.helper.addRecipe(recipe);
+
+                    //notify user of change and send back to the main screen
+                    Toast.makeText(AddRecipeActivity.this, "Recipe Updated", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(AddRecipeActivity.this, UserAreaActivity.class);
+                    startActivity(i);
+
+                } else {
+                    MainActivity.helper.addRecipe(recipe);
+                }
             }
         });
 
@@ -147,11 +182,13 @@ public class AddRecipeActivity extends AppCompatActivity {
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        //returning from EnterText activity
         if (requestCode == 1) {
             if(resultCode == RESULT_OK){
                 directions.setText(data.getStringExtra("DIRECTIONS"));
             }
         } else {
+            //returning from IngredientList activity, updating ingredients to reflect removed ingredients
             if (resultCode == RESULT_OK) {
                 String[] updatedIngr = data.getStringArrayExtra("INGREDIENT_LIST");
                 ingredients.clear();

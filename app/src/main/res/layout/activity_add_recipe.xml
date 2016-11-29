@@ -3,7 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
-    android:id="@+id/iDUnits">
+    android:id="@+id/iDUnits"
+    android:padding="5dp">
 
     <Space
         android:layout_width="match_parent"
@@ -106,7 +107,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Select the type of meal:"
-            android:id="@+id/tVFoodType" />
+            android:id="@+id/tVFoodType"
+            android:textSize="14sp" />
 
         <Space
             android:layout_width="20px"
@@ -124,7 +126,8 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.15" />
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.05" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -137,7 +140,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Select the category of food:"
-            android:id="@+id/tVMeal" />
+            android:id="@+id/tVMeal"
+            android:textSize="14sp" />
 
         <Space
             android:layout_width="20px"
@@ -156,36 +160,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.10" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/tvSteps"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.05"
-        android:hint="@string/enterRecipeSteps"
-        android:textSize="18sp" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.075" />
+        android:layout_weight="0.03" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/etRecipeName"
         android:hint="@string/enterRecipeName"
-        android:maxLines = "3"
-        android:textSize="18sp" />
+
+        android:textSize="14sp" />
 
     <Space
-        android:layout_width="20px"
-        android:layout_height="20px"
-        android:layout_weight="0.075" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.02" />
 
     <EditText
         android:layout_width="match_parent"
@@ -193,12 +182,14 @@
         android:inputType="time"
         android:ems="10"
         android:id="@+id/etPrepTime"
-        android:hint="@string/enterPrepTime" />
+        android:hint="@string/enterPrepTime"
+        android:textSize="14sp" />
 
     <Space
-        android:layout_width="20px"
-        android:layout_height="20px"
-        android:layout_weight="0.075" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.01" />
 
     <EditText
         android:layout_width="match_parent"
@@ -206,21 +197,33 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/etCookTime"
-        android:hint="@string/enterCookTime" />
+        android:hint="@string/enterCookTime"
+        android:textSize="14sp" />
 
     <Space
         android:layout_width="347dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.05" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/tvSteps"
+        android:hint="@string/enterRecipeSteps"
+        android:textSize="14sp"
+        android:maxLines = "2"
+        android:textAlignment="textStart" />
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.14">
+        android:layout_weight=".3">
 
         <Button
+            android:layout_gravity="bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add Recipe"

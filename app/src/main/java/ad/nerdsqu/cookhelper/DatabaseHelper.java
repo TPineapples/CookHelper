@@ -19,8 +19,9 @@ import android.content.ContentValues;
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "ProjectDatabse";
 
+    //Table Names and Column Names
+    public static final String DATABASE_NAME = "ProjectDatabse";
 
     public static final String TABLE1_NAME = "Login_Table";
     public static final String TABLE1_COL1 = "User_Names";
@@ -35,7 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE2_COL6 = "Type";
     public static final String TABLE2_COL7 = "Directions";
 
-
+    //Strings for Creating the tables in the database
     public static final String CreateTable1String = "create table " + TABLE1_NAME + " (" + TABLE1_COL1 + " text primary key not null, "
             + TABLE1_COL2 + " text not null);";
 
@@ -49,6 +50,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, 1);
     }
 
+
+    //Create Recipe and Login Table on the creation of the database
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CreateTable1String);
@@ -69,7 +72,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-
+    //Method to delete both tables
     public void DeleteBothTables() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + TABLE1_NAME);
@@ -78,19 +81,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CreateTable2String);
     }
 
+
+    //Drop recipe table only
     public void DeleteRecipeTableValuesAndRemake() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + TABLE2_NAME);
         db.execSQL(CreateTable2String);
     }
 
+    //Drop login table only
     public void DeleteLoginTableValuesAndRemake() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(CreateTable1String);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE1_NAME);
     }
 
-
+    //Method to add login to database
     public boolean addLogin(Login login) {
         SQLiteDatabase Db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -106,7 +112,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-
+    //Add recipe to Database
     public boolean addRecipe(Recipe recipe) {
         SQLiteDatabase Db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -128,14 +134,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public void deleteRecipe(Recipe recipe) {
-        SQLiteDatabase Db = this.getWritableDatabase();
-        String table = "Recipe_Table";
-        String whereClause = "_id=?";
-        String[] whereArgs = new String[] { String.valueOf(recipe.getRecipeName()) };
-        Db.delete(table, whereClause, whereArgs);
-    }
 
+    //Returns true if login is in database, false otherwise
     public boolean IsValidLogin(String UserName, String Password) {
 
         SQLiteDatabase Db = this.getWritableDatabase();
@@ -156,6 +156,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    //Gets a login object from a username string
     public Login getLoginFromUsername(String UserName) {
 
         SQLiteDatabase Db = this.getWritableDatabase();
@@ -175,6 +176,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    //Checks if a recipe is in the database
     public boolean isRecipeInDatabase(String RecipeName) {
 
         SQLiteDatabase Db = this.getWritableDatabase();
@@ -192,6 +194,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    //Gets a recipe object from the name of the recipe
     public Recipe getRecipeFromName(String RecipeName) {
 
         SQLiteDatabase Db = this.getWritableDatabase();
@@ -209,15 +212,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String Category = c.getString(4);
             String Recipe_Type = c.getString(5);
             String Directions = c.getString(6);
-            Recipe recipe = new Recipe(RecipeName, Ingredients, Cook_Time, Preparation_Time,
-                    Category, Recipe_Type, Directions);
+            Recipe recipe = new Recipe(RecipeName, Ingredients, Cook_Time, Preparation_Time, Category, Recipe_Type, Directions);
             return recipe;
 
         }
 
     }
 
-
+    //Retruns an arrayList of all logins
     public ArrayList<Login> getAllLogins() {
         ArrayList<Login> AllLogins = new ArrayList<Login>();
 
@@ -238,6 +240,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return AllLogins;
     }
 
+
+    //Returns an arraylist of all recipes
     public ArrayList<Recipe> getAllRecipes() {
         ArrayList<Recipe> AllRecipes = new ArrayList<Recipe>();
         String selectQuery = "SELECT  * FROM " + TABLE2_NAME;
@@ -265,6 +269,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    //checks if an ingredient is in an array of ingredients
     public boolean IsIngredientInArray(String Ingredient, String[] Ingredients) {
 
         for (int i = 0; i < Ingredients.length; i++) {
@@ -280,6 +285,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    //Searches for recipes with one ingredient
     public ArrayList<Recipe> searchBySingleIngredient(String Ingredient) {
         ArrayList<Recipe> AllRecipes = (ArrayList<Recipe>) getAllRecipes();
         ArrayList<Recipe> ReturnedRecipes = new ArrayList<Recipe>();
@@ -299,6 +305,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    //Searches for recipes with multiple ingredients
     public ArrayList<Recipe> searchByMultipleIngredients(String[] RequiredIngredients) {
         ArrayList<Recipe> AllRecipes = (ArrayList<Recipe>) getAllRecipes();
         ArrayList<Recipe> ReturnedRecipes = new ArrayList<Recipe>();
@@ -323,7 +330,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-
+    //Searches for recipes by category and type
     public ArrayList<Recipe> searchByCategoryAndType(String Category, String Type) {
         SQLiteDatabase Db = this.getWritableDatabase();
         ArrayList<Recipe> CategoryList = searchByCategory(Category);
@@ -347,6 +354,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return ReturnArray;
     }
 
+
+    //Searches the database for recipes by ingredient and type
     public ArrayList<Recipe> searchByIngredientAndType(String[] Ingredients, String Type) {
         SQLiteDatabase Db = this.getWritableDatabase();
         ArrayList<Recipe> IngredientList = searchByMultipleIngredients(Ingredients);
@@ -370,7 +379,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return ReturnArray;
     }
 
-
+    //Searches the database for recipes by ingredient and category
     public ArrayList<Recipe> searchByIngredientAndCategory(String[] Ingredients, String Category) {
         SQLiteDatabase Db = this.getWritableDatabase();
         ArrayList<Recipe> IngredientList = searchByMultipleIngredients(Ingredients);
@@ -394,14 +403,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return ReturnArray;
     }
 
-
-
-
-
-
-
-
-
+    //Searches the database by category
     public ArrayList<Recipe> searchByCategory(String Category) {
 
 
@@ -427,6 +429,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return SortRecipeList(CategoryRecipes);
     }
 
+
+    //Searches the database for recipes by type
     public ArrayList<Recipe> searchByType(String Type) {
 
 
@@ -453,6 +457,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return SortRecipeList(CategoryRecipes);
     }
 
+
+    //General search with category, type, and ingredient array for recipes
     public ArrayList<Recipe> GeneralSearch(String Category, String Type, String[] Ingredients) {
 
         ArrayList<Recipe> List1 = searchByMultipleIngredients(Ingredients);
@@ -493,27 +499,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return SortRecipeList(returnList);
     }
 
-    public ArrayList<Recipe> searchByName(String name) {
-
-        ArrayList<Recipe> result = new ArrayList<>();
-
-        ArrayList<Recipe> recipes = getAllRecipes();
-
-        name = name.toLowerCase();
-
-        String recipeName;
-
-        for (Recipe recipe : recipes) {
-            recipeName = recipe.getRecipeName();
-            if (recipeName.toLowerCase().contains(name)) {
-                result.add(recipe);
-            }
-        }
-
-        return result;
-    }
-
-
+    //Gets all the recipe categories
     public String[] getAllCategories() {
         List<Recipe> RecipeList = getAllRecipes();
         Set<String> StringList = new HashSet<String>();
@@ -532,7 +518,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return sortStringArray(CategoryStrings);
     }
 
-
+    //Gets all the recipe types
     public String[] getAllTypes() {
         ArrayList<Recipe> RecipeList = getAllRecipes();
         Set<String> StringList = new HashSet<String>();
@@ -551,7 +537,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return sortStringArray(TypeStrings);
     }
 
-
+    //Gets all the ingredients for all recipes
     public String[] getAllIngredients() {
         List<Recipe> RecipeList = getAllRecipes();
         Set<String> StringList = new HashSet<String>();
@@ -574,7 +560,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return sortStringArray(IngredientStrings);
     }
 
-
+    //sorts array of strings in alphabetical order
     public String[] sortStringArray(String[] ArrayToSort) {
 
 
@@ -595,7 +581,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return ArrayToSort;
     }
 
-
+    //Sorts a recipe list by alphabetical order starting with the recipe name
     public ArrayList<Recipe> SortRecipeList(ArrayList<Recipe> unSortedList) {
 
         Recipe[] unSortedRecipeArray = new Recipe[unSortedList.size()];
@@ -627,7 +613,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return SortedRecipeList;
     }
 
-
+    //Prints all logins
     public void printAllLogins() {
         List<Login> allLogins = getAllLogins();
         ListIterator<Login> it = allLogins.listIterator();
@@ -638,7 +624,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-
+    //Prints all recipes
     public void printAllRecipes() {
         List<Recipe> allRecipes = getAllRecipes();
         ListIterator<Recipe> it = allRecipes.listIterator();
@@ -648,6 +634,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    //Used to delimit ingredient name from ingredient quantity
     public String[] delimitRecipeString(String recipe) {
         String[] sA = recipe.split(":");
         return sA;
@@ -655,7 +642,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-
+    //Function to edit recipes
     public void editRecipe(Recipe recipe) {
         SQLiteDatabase Db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -667,19 +654,54 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(TABLE2_COL5, recipe.getCategory());
         values.put(TABLE2_COL6, recipe.getRecipe_Type());
         values.put(TABLE2_COL7, recipe.getDirections());
-        Db.update(TABLE2_NAME, values, TABLE2_COL1+ "=?", new String[]{recipe.getRecipeName()});
+        Db.update(TABLE2_NAME, values, TABLE2_COL1 + "=?", new String[]{recipe.getRecipeName()});
     }
 
-    public void setPassword (String pass,String user){
+
+    //function to set password of a given user name
+    public void setPassword(String pass, String user) {
         SQLiteDatabase Db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("Password", pass);
-        Db.update("Login_Table", cv, TABLE1_COL1 + "= ?", new String[] {user});
+        Db.update("Login_Table", cv, TABLE1_COL1 + "= ?", new String[]{user});
     }
+
+    //Search for a recipe by name using contains method
+    public ArrayList<Recipe> searchByName(String name) {
+        ArrayList<Recipe> result = new ArrayList<>();
+        ArrayList<Recipe> recipes = getAllRecipes();
+        name = name.toLowerCase();
+        String recipeName;
+        for (Recipe recipe : recipes) {
+            recipeName = recipe.getRecipeName();
+            if (recipeName.toLowerCase().contains(name)) {
+                result.add(recipe);
+            }
+        }
+        return result;
+    }
+
+
+    //Method to delete a recipe given a recipe object
+
+    public void deleteRecipe(Recipe recipe) {
+        SQLiteDatabase Db = this.getWritableDatabase();
+        String table = "Recipe_Table";
+        String whereClause = "Recipe_Name=?";
+        String[] whereArgs = new String[]{String.valueOf(recipe.getRecipeName())};
+        Db.delete(table, whereClause, whereArgs);
+    }
+
+
+    //Delete recipe from a name
+
+    public void deleteRecipeFromName(String RecipeName) {
+        SQLiteDatabase Db = this.getWritableDatabase();
+        String table = "Recipe_Table";
+        String whereClause = "Recipe_Name=?";
+        String[] whereArgs = new String[]{RecipeName};
+        Db.delete(table, whereClause, whereArgs);
+    }
+
 }
-
-
-
-
-
 
