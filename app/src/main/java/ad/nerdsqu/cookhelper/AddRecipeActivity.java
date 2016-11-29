@@ -125,6 +125,7 @@ public class AddRecipeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 StringHelper help = new StringHelper();
                 Recipe recipe;
+
                 String rCategory = help.getSpinnerString(category);
                 String rType = help.getSpinnerString(type);
                 String rName = help.getEditTextString(name);
@@ -138,6 +139,10 @@ public class AddRecipeActivity extends AppCompatActivity {
 
                 recipe = new Recipe(rName, ingredArray, rPrepTime, rCookTime,
                                                         rCategory, rType, rDirections);
+
+                if (getIntent().hasExtra("RECIPE_NAME")) {
+                    MainActivity.helper.deleteRecipe(recipe);
+                }
 
                 MainActivity.helper.addRecipe(recipe);
             }
