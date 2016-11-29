@@ -45,9 +45,9 @@ public class RecipeListActivity extends AppCompatActivity {
         listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
-//                Intent i = new Intent(this, RecipeManageActivity.class);
-//                i.putExtra("RECIPE_NAME", recipes[position]);
-//                startActivity(i);
+                Intent i = new Intent(RecipeListActivity.this, RecipeManageActivity.class);
+                i.putExtra("RECIPE_NAME", recipes[position]);
+                startActivity(i);
 
                 return false;
             }

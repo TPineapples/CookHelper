@@ -128,6 +128,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public void deleteRecipe(Recipe recipe) {
+        SQLiteDatabase Db = this.getWritableDatabase();
+        String table = "Recipe_Table";
+        String whereClause = "_id=?";
+        String[] whereArgs = new String[] { String.valueOf(recipe.getRecipeName()) };
+        Db.delete(table, whereClause, whereArgs);
+    }
+
     public boolean IsValidLogin(String UserName, String Password) {
 
         SQLiteDatabase Db = this.getWritableDatabase();
@@ -201,7 +209,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String Category = c.getString(4);
             String Recipe_Type = c.getString(5);
             String Directions = c.getString(6);
-            Recipe recipe = new Recipe(RecipeName, Ingredients, Cook_Time, Preparation_Time, Category, Recipe_Type, Directions);
+            Recipe recipe = new Recipe(RecipeName, Ingredients, Cook_Time, Preparation_Time,
+                    Category, Recipe_Type, Directions);
             return recipe;
 
         }

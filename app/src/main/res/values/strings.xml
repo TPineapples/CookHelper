@@ -176,7 +176,16 @@
     <string name="enterPrepTime">Enter the prep time in minutes</string>
     <string name="enterRecipeName">Enter the recipe name</string>
     <string name="setDirections">Set Directions</string>
-    <string name="confirmSetText">Confirm Text</string>>
+    <string name="confirmSetText">Confirm Text</string>
+    <string name="cantUndo">(CANNOT BE UNDONE)</string>
+    <string name="delRecipe">Delete Recipe</string>
+    <string name="editRecipe">Edit Recipe</string>
+    <string name="viewIngredients">View Ingredients</string>
+    <string name="longPress">Long Press to Remove Ingredient:</string>
+    <string name="removeIngredients">Remove Ingredients</string>
+    <string name="confirmDelete">Confirm Changes</string>
+    <string name="longPressToManage">Long press recipe to edit/delete</string>>
+    <string name="updateRecipe">Update Recipe</string>
 
 
 </resources>

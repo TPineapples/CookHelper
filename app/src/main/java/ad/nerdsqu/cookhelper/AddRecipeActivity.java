@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Aaron on 11/27/2016.
@@ -27,6 +28,7 @@ public class AddRecipeActivity extends AppCompatActivity {
     private Spinner unit;
     private Spinner category;
     private Spinner type;
+    private Button addRecipe;
     private ArrayList<String> ingredients = new ArrayList<String>();
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,43 @@ public class AddRecipeActivity extends AppCompatActivity {
         quantity = (EditText)findViewById(R.id.etQuantity);
         directions = (TextView)findViewById(R.id.tvSteps);
 
+        unit = (Spinner)findViewById(R.id.unitSpinner);
+        category = (Spinner)findViewById(R.id.categorySpinner);
+        type = (Spinner)findViewById(R.id.typeSpinnerAdd);
 
+        if (getIntent().hasExtra("RECIPE_NAME")) {
+            Recipe recipe = MainActivity.helper.getRecipeFromName
+                    (getIntent().getStringExtra("RECIPE_NAME"));
+
+            addRecipe.setText(R.string.updateRecipe);
+            TextView title = (TextView)findViewById(R.id.tvAddRecipeTitle);
+            title.setText(R.string.updateRecipe);
+
+            for (String ingred : recipe.getIngredients()) {
+                ingredients.add(ingred);
+            }
+
+            String[] categoryArray = getResources().getStringArray(R.array.food_category);
+            String[] typeArray = getResources().getStringArray(R.array.food_type);
+
+            int categoryIndex = Arrays.asList(categoryArray).indexOf(recipe.getCategory());
+            int typeIndex = Arrays.asList(typeArray).indexOf(recipe.getRecipe_Type());
+
+            category.setSelection(categoryIndex);
+            type.setSelection(typeIndex);
+
+            directions.setText(recipe.getDirections());
+
+            name.setText(recipe.getRecipeName());
+
+            String[] prepSplit = recipe.getPreparation_Time().split(" ");
+            prepTime.setText(prepSplit[0]);
+
+            String[] cookSplit = recipe.getCook_Time().split(" ");
+            cookTime.setText(cookSplit[0]);
+
+
+        }
 
         directions.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -52,9 +90,7 @@ public class AddRecipeActivity extends AppCompatActivity {
             }
         });
 
-        unit = (Spinner)findViewById(R.id.unitSpinner);
-        category = (Spinner)findViewById(R.id.categorySpinner);
-        type = (Spinner)findViewById(R.id.typeSpinnerAdd);
+
 
         Button addIngredient = (Button) findViewById(R.id.bAddIngredient);
         addIngredient.setOnClickListener(new View.OnClickListener() {
@@ -70,8 +106,21 @@ public class AddRecipeActivity extends AppCompatActivity {
         });
 
 
+        Button removeIngredients = (Button)findViewById(R.id.bRemoveIngredients);
+        removeIngredients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent deleteIngredients = new Intent(AddRecipeActivity.this, IngredientListActivity.class);
+                String[] ingredArray = new String[ingredients.size()];
+                ingredArray = ingredients.toArray(ingredArray);
+                deleteIngredients.putExtra("INGREDIENT_LIST", ingredArray);
+                startActivityForResult(deleteIngredients, 2);
 
-        Button addRecipe = (Button) findViewById(R.id.bAddRecipe);
+            }
+        });
+
+
+        addRecipe = (Button) findViewById(R.id.bAddRecipe);
         addRecipe.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 StringHelper help = new StringHelper();
@@ -101,6 +150,15 @@ public class AddRecipeActivity extends AppCompatActivity {
         if (requestCode == 1) {
             if(resultCode == RESULT_OK){
                 directions.setText(data.getStringExtra("DIRECTIONS"));
+            }
+        } else {
+            if (resultCode == RESULT_OK) {
+                String[] updatedIngr = data.getStringArrayExtra("INGREDIENT_LIST");
+                ingredients.clear();
+                for (String ing : updatedIngr) {
+                    ingredients.add(ing);
+
+                }
             }
         }
     }

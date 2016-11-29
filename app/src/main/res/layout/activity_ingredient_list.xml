@@ -6,29 +6,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="ad.nerdsqu.cookhelper.RecipeListActivity">
+    tools:context="ad.nerdsqu.cookhelper.IngredientListActivity">
 
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:weightSum="1">
 
         <TextView
+            android:text="@string/longPress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tvNoResults"
+            android:id="@+id/tvLongPress"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
             android:textAlignment="center"
             android:textColor="@android:color/black"
-            tools:text="@string/longPressToManage"
             android:textSize="18sp" />
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="427dp"
             android:id="@+id/lvSavedList"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
-    </LinearLayout>
+            android:layout_centerHorizontal="true"
+            android:layout_weight="0.44" />
 
+        <Button
+            android:text="@string/confirmDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bConfirmRemove" />
+
+    </LinearLayout>
 </RelativeLayout>

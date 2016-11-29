@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Add a Recipe"
-        android:id="@+id/tVAddARecipe"
+        android:id="@+id/tvAddRecipeTitle"
         android:layout_gravity="center_horizontal"
         android:textColor="@android:color/background_dark" />
 
@@ -69,15 +69,23 @@
 
         <Space
             android:layout_width="351dp"
-            android:layout_height="66dp" />
+            android:layout_height="62dp" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bAddIngredient"
-            android:layout_gravity="center_horizontal|bottom"
+            android:layout_gravity="left|bottom"
             android:layout_weight="0.01"
             android:text="@string/addIngredient" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bRemoveIngredients"
+            android:layout_gravity="right|bottom"
+            android:layout_weight="0.01"
+            android:text="@string/removeIngredients" />
 
     </FrameLayout>
 
@@ -109,7 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:entries="@array/food_type"
-            android:id="@+id/typeSpinnerAdd"
+            android:id="@+id/typeSpinner"
             android:layout_weight="0.83" />
     </LinearLayout>
 
