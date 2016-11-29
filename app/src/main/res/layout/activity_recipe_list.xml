@@ -6,8 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="ad.nerdsqu.cookhelper.SavedRecipesActivity">
+    tools:context="ad.nerdsqu.cookhelper.RecipeListActivity">
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvNoResults"
+        android:textAlignment="center"
+        android:textColor="@android:color/black" />
 
     <ListView
         android:layout_width="match_parent"

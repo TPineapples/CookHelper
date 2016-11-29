@@ -1,20 +1,20 @@
 package ad.nerdsqu.cookhelper;
 
-        import android.content.Context;
-        import java.util.ArrayList;
-        import java.util.HashSet;
-        import java.util.Iterator;
-        import java.util.List;
-        import java.util.ListIterator;
-        import java.util.Set;
-        import android.database.Cursor;
-        import android.database.sqlite.SQLiteConstraintException;
-        import android.database.sqlite.SQLiteDatabase;
-        import android.database.sqlite.SQLiteOpenHelper;
-        import android.util.Log;
-        import android.content.ContentValues;
+import android.content.Context;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Set;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.content.ContentValues;
 
-        /**
+/**
  * Created by James on 2016-11-14.
  */
 
@@ -195,37 +195,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } else {
             c.moveToFirst();
 
-
-            String[] ingredients = formatString(Recipe.IngredientsStringToArray(c.getString(1)));
-
-
-            String preparation_Time = c.getString(2);
-            String cook_Time = c.getString(3);
-            String category = c.getString(4);
-            String recipe_Type = c.getString(5);
-            String directions = c.getString(6);
-            Recipe recipe = new Recipe(RecipeName, ingredients, cook_Time, preparation_Time, category, recipe_Type, directions);
+            String[] Ingredients = Recipe.IngredientsStringToArray(c.getString(1));
+            String Preparation_Time = c.getString(2);
+            String Cook_Time = c.getString(3);
+            String Category = c.getString(4);
+            String Recipe_Type = c.getString(5);
+            String Directions = c.getString(6);
+            Recipe recipe = new Recipe(RecipeName, Ingredients, Cook_Time, Preparation_Time, Category, Recipe_Type, Directions);
             return recipe;
 
         }
 
-    }
-    //removing : delimiters and formatting ingredients as: <amount> <ingredient>
-    //instead of <ingredient>:<amount>
-    private String[] formatString(String[] list) {
-        ArrayList<String> formattedList = new ArrayList<String>();
-        String[] splits;
-        String temp = "";
-
-        for (String item : list) {
-            splits = item.split(":");
-            for (int i = 0; i < splits.length; i++) {
-                temp = temp + " " + splits[i];
-            }
-            formattedList.add(temp.substring(1)); //remove leading space
-            temp = "";
-        }
-        return formattedList.toArray(list);
     }
 
 
@@ -334,6 +314,85 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+
+    public ArrayList<Recipe> searchByCategoryAndType(String Category, String Type) {
+        SQLiteDatabase Db = this.getWritableDatabase();
+        ArrayList<Recipe> CategoryList = searchByCategory(Category);
+        ArrayList<Recipe> TypeList = searchByType(Type);
+        ArrayList<Recipe> ReturnArray = new ArrayList<Recipe>();
+
+        ListIterator<Recipe> it1 = CategoryList.listIterator();
+        while (it1.hasNext()) {
+            ListIterator<Recipe> it2 = TypeList.listIterator();
+            while (it2.hasNext()) {
+                Recipe toAdd = it1.next();
+                if (toAdd.equals(it2.next())) {
+                    ReturnArray.add(toAdd);
+                }
+            }
+
+
+        }
+
+
+        return ReturnArray;
+    }
+
+    public ArrayList<Recipe> searchByIngredientAndType(String[] Ingredients, String Type) {
+        SQLiteDatabase Db = this.getWritableDatabase();
+        ArrayList<Recipe> IngredientList = searchByMultipleIngredients(Ingredients);
+        ArrayList<Recipe> TypeList = searchByType(Type);
+        ArrayList<Recipe> ReturnArray = new ArrayList<Recipe>();
+
+        ListIterator<Recipe> it1 = IngredientList.listIterator();
+        while (it1.hasNext()) {
+            ListIterator<Recipe> it2 = TypeList.listIterator();
+            while (it2.hasNext()) {
+                Recipe toAdd = it1.next();
+                if (toAdd.equals(it2.next())) {
+                    ReturnArray.add(toAdd);
+                }
+            }
+
+
+        }
+
+
+        return ReturnArray;
+    }
+
+
+    public ArrayList<Recipe> searchByIngredientAndCategory(String[] Ingredients, String Category) {
+        SQLiteDatabase Db = this.getWritableDatabase();
+        ArrayList<Recipe> IngredientList = searchByMultipleIngredients(Ingredients);
+        ArrayList<Recipe> CategoryList = searchByCategory(Category);
+        ArrayList<Recipe> ReturnArray = new ArrayList<Recipe>();
+
+        ListIterator<Recipe> it1 = IngredientList.listIterator();
+        while (it1.hasNext()) {
+            ListIterator<Recipe> it2 = CategoryList.listIterator();
+            while (it2.hasNext()) {
+                Recipe toAdd = it1.next();
+                if (toAdd.equals(it2.next())) {
+                    ReturnArray.add(toAdd);
+                }
+            }
+
+
+        }
+
+
+        return ReturnArray;
+    }
+
+
+
+
+
+
+
+
+
     public ArrayList<Recipe> searchByCategory(String Category) {
 
 
@@ -342,7 +401,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor c = Db.rawQuery(QueryString, new String[]{Category});
         ArrayList<Recipe> CategoryRecipes = new ArrayList<Recipe>();
         if (c.getCount() == 0) {
-            return null;
+            return CategoryRecipes;
         } else {
             c.moveToFirst();
             String RecipeName = c.getString(0);
@@ -367,7 +426,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor c = Db.rawQuery(QueryString, new String[]{Type});
         ArrayList<Recipe> CategoryRecipes = new ArrayList<Recipe>();
         if (c.getCount() == 0) {
-            return null;
+            return CategoryRecipes;
         } else {
             c.moveToFirst();
             String RecipeName = c.getString(0);
@@ -423,6 +482,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         }
         return SortRecipeList(returnList);
+    }
+
+    public ArrayList<Recipe> searchByName(String name) {
+
+        ArrayList<Recipe> result = new ArrayList<>();
+
+        ArrayList<Recipe> recipes = getAllRecipes();
+
+        name = name.toLowerCase();
+
+        String recipeName;
+
+        for (Recipe recipe : recipes) {
+            recipeName = recipe.getRecipeName();
+            if (recipeName.toLowerCase().contains(name)) {
+                result.add(recipe);
+            }
+        }
+
+        return result;
     }
 
 
@@ -589,7 +668,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Db.update("Login_Table", cv, TABLE1_COL1 + "= ?", new String[] {user});
     }
 }
-
 
 
 

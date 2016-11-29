@@ -1,13 +1,12 @@
 package ad.nerdsqu.cookhelper;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.view.View.OnClickListener;
+
+import java.util.ArrayList;
 
 /**
  * Created by Aaron on 11/27/2016.
@@ -45,8 +44,15 @@ public class UserAreaActivity extends AppCompatActivity {
         });
         mySavedRecipes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(UserAreaActivity.this, SavedRecipesActivity.class);
-                startActivity(i);
+                Intent intent = new Intent(UserAreaActivity.this, RecipeListActivity.class);
+
+                ArrayList<Recipe> recipes = MainActivity.helper.getAllRecipes();
+                String[] recipeArray = new String[recipes.size()];
+                for (int i = 0; i < recipes.size(); i++) {
+                    recipeArray[i] = recipes.get(i).getRecipeName();
+                }
+                intent.putExtra("RECIPE_LIST", recipeArray);
+                startActivity(intent);
             }
 
         });

@@ -17,18 +17,21 @@
         </activity>
         <activity android:name=".Register" />
         <activity android:name=".MyAccountActivity" />
-        <activity android:name=".HelpLoginActivity"/>
+        <activity android:name=".HelpLoginActivity" />
         <activity android:name=".UserAreaActivity" />
-        <activity android:name=".SavedRecipesActivity" />
+        <activity android:name=".RecipeListActivity" />
         <activity
             android:name=".SearchRecipeActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".AddRecipeActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize">
+            android:windowSoftInputMode="adjustPan|adjustResize"></activity>
+        <activity android:name=".RecipeActivity" />
+        <activity android:name=".ViewDirectionsActivity" />
+        <activity
+            android:name=".EnterTextActivity"
+            android:windowSoftInputMode="adjustResize">
         </activity>
-        <activity android:name=".RecipeActivity"/>
-        <activity android:name=".ViewDirectionsActivity"/>
     </application>
 
 </manifest>
