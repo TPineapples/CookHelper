@@ -5,7 +5,7 @@
 
     <string-array name="food_category">
 
-
+        <item></item>
         <item>Indian</item>
         <item>Italian</item>
         <item>Chinese</item>
@@ -16,7 +16,7 @@
 
     <string-array name="food_type">
 
-
+        <item></item>
         <item>Breakfast</item>
         <item>Lunch</item>
         <item>Dinner</item>
@@ -103,6 +103,7 @@
 
     <string-array name="unit_measurement">
 
+        <item></item>
         <item>g</item>
         <item>kg</item>
         <item>mL</item>

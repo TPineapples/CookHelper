@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         helper.addLogin(temp);
         System.out.println(helper.IsValidLogin("Default", "Password1"));
 
+
         final EditText username = (EditText) findViewById(R.id.fieldUsername);
         final EditText password = (EditText) findViewById(R.id.fieldPassword);
         Button newAccount = (Button) findViewById(R.id.buttonRegister);
@@ -76,29 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-//        String RecipeName = "Buffalo Chicken Wings";
-//
-//        String[] Ingredients = {"Flour:1/2:cup", "Oil for deep frying","salt:1/2:tbsp", "paprika:1/4:tbsp",
-//
-//                "HotSauce:1/4cup"};
-//
-//        String Cook_Time = "15 minutes";
-//
-//        String Preparation_Time = "15 minutes";
-//
-//        String Category = "American";
-//
-//        String Recipe_Type = "Dinner";
-//
-//        String Directions = "In a small bowl mix together the flour, paprika, cayenne pepper and salt. Place chicken wings in a large nonporous glass dish or bowl and sprinkle flour mixture over them until they are evenly coated. Cover dish or bowl and refrigerate for 60 to 90 minutes."
-//
-//                + "Heat oil in a deep fryer to 375 degrees F (190 degrees C). The oil should be just enough to cover wings entirely, an inch or so deep. Combine the butter, hot sauce, pepper and garlic powder in a small saucepan over low heat. Stir together and heat until butter is melted and mixture is well blended. "
-//
-//                + "Remove from heat and reserve for serving Fry coated wings in hot oil for 10 to 15 minutes, or until parts of wings begin to turn brown. Remove from heat, place wings in serving bowl, add hot sauce mixture and stir together. Serve.";
-//
-//        Recipe recipe = new Recipe(RecipeName, Ingredients, Cook_Time, Preparation_Time, Category, Recipe_Type, Directions);
 
-//        helper.addRecipe(recipe);
         newAccount.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent i = new Intent(MainActivity.this, Register.class);

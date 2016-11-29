@@ -29,7 +29,7 @@ public class RecipeActivity extends AppCompatActivity {
             TextView total = (TextView)findViewById(R.id.tvTotalTime);
             TextView category = (TextView)findViewById(R.id.tvFoodCategory);
             TextView type = (TextView)findViewById(R.id.tvFoodType);
-
+            TextView title = (TextView)findViewById(R.id.tvRecipeTitle);
 
 
             //setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
@@ -39,6 +39,7 @@ public class RecipeActivity extends AppCompatActivity {
             String recipeName = getIntent().getStringExtra("RECIPE_NAME");
             recipe = MainActivity.helper.getRecipeFromName(recipeName);
 
+            title.setText(recipeName);
 
             //calculate total time by splitting the string (<xx> minutes)
             //to extract the leading int <xx>
@@ -54,7 +55,21 @@ public class RecipeActivity extends AppCompatActivity {
             category.setText(recipe.getCategory());
             type.setText(recipe.getRecipe_Type());
 
-            String[] ingredients = recipe.getIngredients();
+
+            String[] unformattedIngredients = recipe.getIngredients();
+            String[] ingredients = new String[unformattedIngredients.length];
+            String[] split;
+            for (int i = 0; i < recipe.getIngredients().length; i++) {
+                if (unformattedIngredients[i].contains(":")) {
+                    split = unformattedIngredients[i].split(":");
+                    ingredients[i] = split[1] + " " + split[0];
+                } else {
+                    ingredients[i] = unformattedIngredients[i];
+                }
+
+            }
+
+
 
             ArrayAdapter<String> ingredientAdapter =
                     new ArrayAdapter<String>(this, R.layout.list_ingredient_template, ingredients);

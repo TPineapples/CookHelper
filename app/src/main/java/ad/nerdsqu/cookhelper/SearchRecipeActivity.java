@@ -61,8 +61,8 @@ public class SearchRecipeActivity extends AppCompatActivity {
                 ArrayList<Recipe> searchResult = new ArrayList<>();
 
                 boolean ingExists = !(rIngredients.length == 0);
-                boolean typeExists = !rType.equals(" ");
-                boolean categExists = !rCategory.equals(" ");
+                boolean typeExists = !(rType.equals("")||rType.equals("Any"));
+                boolean categExists = !(rCategory.equals("")||rCategory.equals("All"));
 
                 Intent intent = new Intent(SearchRecipeActivity.this, RecipeListActivity.class);
                 //TODO change to new activity with serach results
