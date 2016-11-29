@@ -174,6 +174,7 @@ public class AddRecipeActivity extends AppCompatActivity {
 
                 } else {
                     MainActivity.helper.addRecipe(recipe);
+                    Toast.makeText(AddRecipeActivity.this, "Successfully Added Recipe", Toast.LENGTH_SHORT).show();
                 }
             }
         });
