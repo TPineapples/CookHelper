@@ -3,7 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
-    android:id="@+id/iDUnits">
+    android:id="@+id/iDUnits"
+    android:padding="5dp">
 
     <Space
         android:layout_width="match_parent"
@@ -164,9 +165,9 @@
         android:ems="10"
         android:id="@+id/tvSteps"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.05"
         android:hint="@string/enterRecipeSteps"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textAlignment="textStart" />
 
     <Space
         android:layout_width="match_parent"
