@@ -45,6 +45,7 @@ public class IngredientListActivity extends AppCompatActivity {
         listview.setAdapter(itemsAdapter);
 
 
+        //remove long pressed ingredient from ingredients AND ingredArray to preserve formatting
         listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -61,14 +62,15 @@ public class IngredientListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent back = new Intent();
 
-                ArrayList<String> temp = new ArrayList<>();
-
+                //clears the ingredients and repopulates from array, ignoring empty ("deleted") Strings
+                //used to preserve String formatting of ingredArray
+                ingredients.clear();
                 for (String ingred : ingredArray) {
-                    if (!ingred.equals(""))  temp.add(ingred);
+                    if (!ingred.equals(""))  ingredients.add(ingred);
                 }
 
-                String[] updatedIngr = new String[temp.size()];
-                updatedIngr = temp.toArray(updatedIngr);
+                String[] updatedIngr = new String[ingredients.size()];
+                updatedIngr = ingredients.toArray(updatedIngr);
 
                 back.putExtra("INGREDIENT_LIST", updatedIngr);
                 setResult(RESULT_OK, back);

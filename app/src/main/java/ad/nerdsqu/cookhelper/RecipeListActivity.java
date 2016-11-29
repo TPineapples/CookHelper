@@ -24,11 +24,6 @@ public class RecipeListActivity extends AppCompatActivity {
                 new ArrayAdapter<String>(this, R.layout.list_item_template, recipes);
 
 
-        if (recipes.length == 0) {
-            TextView noResult = (TextView)findViewById(R.id.tvNoResults);
-            noResult.setText(getResources().getString(R.string.noResults));
-        }
-
         listview.setAdapter(itemsAdapter);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -49,7 +44,7 @@ public class RecipeListActivity extends AppCompatActivity {
                 i.putExtra("RECIPE_NAME", recipes[position]);
                 startActivity(i);
 
-                return false;
+                return true;
             }
         });
     }
