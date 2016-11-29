@@ -164,9 +164,9 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:id="@+id/tvSteps"
-        android:layout_gravity="center_horizontal"
         android:hint="@string/enterRecipeSteps"
         android:textSize="18sp"
+        android:maxLines = "3"
         android:textAlignment="textStart" />
 
     <Space
@@ -180,7 +180,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/etRecipeName"
         android:hint="@string/enterRecipeName"
-        android:maxLines = "3"
+
         android:textSize="18sp" />
 
     <Space

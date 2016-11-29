@@ -46,11 +46,14 @@ public class AddRecipeActivity extends AppCompatActivity {
 
         unit = (Spinner)findViewById(R.id.unitSpinner);
         category = (Spinner)findViewById(R.id.categorySpinner);
-        type = (Spinner)findViewById(R.id.typeSpinnerAdd);
+        type = (Spinner)findViewById(R.id.typeSpinner);
+
+        addRecipe = (Button)findViewById(R.id.bAddRecipe);
 
         if (getIntent().hasExtra("RECIPE_NAME")) {
             Recipe recipe = MainActivity.helper.getRecipeFromName
                     (getIntent().getStringExtra("RECIPE_NAME"));
+
 
             addRecipe.setText(R.string.updateRecipe);
             TextView title = (TextView)findViewById(R.id.tvAddRecipeTitle);
@@ -142,9 +145,13 @@ public class AddRecipeActivity extends AppCompatActivity {
 
                 if (getIntent().hasExtra("RECIPE_NAME")) {
                     MainActivity.helper.deleteRecipe(recipe);
+                    MainActivity.helper.addRecipe(recipe);
+                    Toast.makeText(AddRecipeActivity.this, "Recipe Updated", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(AddRecipeActivity.this, UserAreaActivity.class);
+                    startActivity(i);
+                } else {
+                    MainActivity.helper.addRecipe(recipe);
                 }
-
-                MainActivity.helper.addRecipe(recipe);
             }
         });
 

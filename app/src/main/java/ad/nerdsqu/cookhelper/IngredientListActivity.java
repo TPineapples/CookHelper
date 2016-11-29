@@ -14,12 +14,12 @@ import java.util.ArrayList;
 
 
 public class IngredientListActivity extends AppCompatActivity {
-    private ArrayList<String> ingredients;
+    private ArrayList<String> ingredients = new ArrayList<>();
     private String[] ingredArray;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipe_list);
+        setContentView(R.layout.activity_ingredient_list);
         ListView listview = (ListView)findViewById(R.id.lvSavedList);
 
 
@@ -29,8 +29,13 @@ public class IngredientListActivity extends AppCompatActivity {
         //add array to arrayList changing formatting from <ingredient>:<amount>
         //to <amount> <ingredient>
         for (String ingr : ingredArray) {
-            split = ingr.split(":");
-            ingredients.add(split[1] + " " + split[0]);
+            if (ingr.contains(":")) {
+                split = ingr.split(":");
+                ingredients.add(split[1] + " " + split[0]);
+            } else {
+                ingredients.add(ingr);
+            }
+
         }
 
 
