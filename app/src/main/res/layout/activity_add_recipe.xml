@@ -1,23 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:weightSum="1"
-    android:scrollbarStyle="insideOverlay"
-    android:fillViewport="true">
-
-
-    <LinearLayout
-
-    android:id="@+id/iDUnits"
-    android:padding="10dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    app:layout_scrollFlags="scroll">
+    android:weightSum="1"
+    android:id="@+id/iDUnits">
 
     <Space
         android:layout_width="match_parent"
@@ -29,14 +15,15 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Add a Recipe"
-        android:id="@+id/tVAddARecipe"
+        android:id="@+id/tvAddRecipeTitle"
         android:layout_gravity="center_horizontal"
         android:textColor="@android:color/background_dark" />
 
     <Space
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_height="30dp" />
+        android:layout_weight="0.03" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -47,66 +34,65 @@
         android:background="@drawable/drawable_rectangle">
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:weightSum="1">
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:weightSum="1">
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.52"
-                    android:hint="@string/ingredient"
-                    android:gravity="center_horizontal"
-                    android:id="@+id/etIngredient" />
-
-
-                <EditText
-                    android:layout_width="49dp"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:ems="10"
-                    android:id="@+id/etQuantity"
-                    android:hint="@string/quantity"
-                    android:gravity="center_horizontal"
-                    android:layout_weight="0.53" />
-
-                <Spinner
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/unit_measurement"
-                    android:id="@+id/unitSpinner" />
-
-            </LinearLayout>
-            <Space
-                android:layout_width="match_parent"
+            <EditText
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.52" />
+                android:id="@+id/etIngredient"
+                android:layout_weight="0.65"
+                android:hint="Ingredient"
+                android:gravity="center_horizontal"/>
 
-            <Button
-                android:layout_width="match_parent"
+
+            <EditText
+                android:layout_width="49dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/bAddIngredient"
-                android:layout_gravity="center_horizontal|bottom"
-                android:layout_weight="0.01"
-                android:text="@string/addIngredient" />
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/etQuantity"
+                android:hint="Quantity"
+                android:gravity="center_horizontal"
+                android:layout_weight="0.45" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/unit_measurement"
+                android:id="@+id/unitSpinner" />
 
         </LinearLayout>
 
+        <Space
+            android:layout_width="351dp"
+            android:layout_height="62dp" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bAddIngredient"
+            android:layout_gravity="left|bottom"
+            android:layout_weight="0.01"
+            android:text="@string/addIngredient" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bRemoveIngredients"
+            android:layout_gravity="right|bottom"
+            android:layout_weight="0.01"
+            android:text="@string/removeIngredients" />
 
     </FrameLayout>
 
-        <Space
+    <Space
         android:layout_width="373dp"
-            android:layout_weight="0.15"
-            android:layout_height="30dp" />
+        android:layout_height="20px"
+        android:layout_weight="0.01" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -137,8 +123,8 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_weight="0.15"
-        android:layout_height="20dp" />
+        android:layout_height="wrap_content"
+        android:layout_weight="0.15" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -168,37 +154,71 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.01" />
-
-        <EditText
-        android:layout_width="372dp"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/etAddDirections"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.01"
-        android:hint="@string/enterRecipeSteps" />
+        android:layout_weight="0.10" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/tvSteps"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.05"
+        android:hint="@string/enterRecipeSteps"
+        android:textSize="18sp" />
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.17" />
+        android:layout_weight="0.075" />
 
-        <LinearLayout
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etRecipeName"
+        android:hint="@string/enterRecipeName"
+        android:maxLines = "3"
+        android:textSize="18sp" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:layout_weight="0.075" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:id="@+id/etPrepTime"
+        android:hint="@string/enterPrepTime" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:layout_weight="0.075" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/etCookTime"
+        android:hint="@string/enterCookTime" />
+
+    <Space
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.05" />
+
+    <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.14">
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
 
         <Button
             android:layout_width="wrap_content"
@@ -208,11 +228,4 @@
 
     </LinearLayout>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.15"
-            android:layout_height="300dp" />
-
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>

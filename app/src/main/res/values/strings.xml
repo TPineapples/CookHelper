@@ -5,12 +5,10 @@
 
     <string-array name="food_category">
 
+
         <item>Indian</item>
-
         <item>Italian</item>
-
         <item>Chinese</item>
-
         <item>All</item>
 
     </string-array>
@@ -18,16 +16,12 @@
 
     <string-array name="food_type">
 
+
         <item>Breakfast</item>
-
         <item>Lunch</item>
-
         <item>Dinner</item>
-
         <item>Dessert</item>
-
         <item>Snack</item>
-
         <item>Any</item>
 
     </string-array>
@@ -109,20 +103,12 @@
 
     <string-array name="unit_measurement">
 
-        <item></item>
-
         <item>g</item>
-
         <item>kg</item>
-
         <item>mL</item>
-
         <item>L</item>
-
         <item>tsp(s)</item>
-
         <item>Tbsp(s)</item>
-
         <item>C</item>
 
     </string-array>
@@ -182,7 +168,24 @@
     <string name="ingredient">Ingredient</string>
     <string name="directions">Directions (Press Here for Fullscreen)</string>
     <string name="serach">Search</string>
-    <string name="addIngredient">Add Ingredient</string>>
+    <string name="addIngredient">Add Ingredient</string>
+    <string name="searchRecipeName">Search by Recipe Name</string>
+    <string name="or">OR</string>
+    <string name="noResults">No results to display.</string>
+    <string name="enterCookTime">Enter the cook time in minutes</string>
+    <string name="enterPrepTime">Enter the prep time in minutes</string>
+    <string name="enterRecipeName">Enter the recipe name</string>
+    <string name="setDirections">Set Directions</string>
+    <string name="confirmSetText">Confirm Text</string>
+    <string name="cantUndo">(CANNOT BE UNDONE)</string>
+    <string name="delRecipe">Delete Recipe</string>
+    <string name="editRecipe">Edit Recipe</string>
+    <string name="viewIngredients">View Ingredients</string>
+    <string name="longPress">Long Press to Remove Ingredient:</string>
+    <string name="removeIngredients">Remove Ingredients</string>
+    <string name="confirmDelete">Confirm Changes</string>
+    <string name="longPressToManage">Long press recipe to edit/delete</string>>
+    <string name="updateRecipe">Update Recipe</string>
 
 
 </resources>
