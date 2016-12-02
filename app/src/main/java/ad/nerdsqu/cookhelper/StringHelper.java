@@ -23,4 +23,6 @@ public class StringHelper {
     public String getTextViewString(TextView text) {
         return !(text.getText() == null) ? text.getText().toString() : "";
     }
+
+
 }

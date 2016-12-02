@@ -30,8 +30,8 @@ public class SearchRecipeActivity extends AppCompatActivity {
 
         ingredientIn = (EditText)findViewById(R.id.etAddIngredient);
         name = (EditText)findViewById(R.id.etSearchRecipeName);
-        category = (Spinner)findViewById(R.id.spinType);
-        type = (Spinner)findViewById(R.id.spinCategory);
+        category = (Spinner)findViewById(R.id.spinCategory);
+        type = (Spinner)findViewById(R.id.spinType);
 
 
 
@@ -65,7 +65,7 @@ public class SearchRecipeActivity extends AppCompatActivity {
                 boolean categExists = !(rCategory.equals("")||rCategory.equals("All"));
 
                 Intent intent = new Intent(SearchRecipeActivity.this, RecipeListActivity.class);
-                //TODO change to new activity with serach results
+
                 if (!rName.equals("")) {
                     searchResult = MainActivity.helper.searchByName(rName);
                 } else {

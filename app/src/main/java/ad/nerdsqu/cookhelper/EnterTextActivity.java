@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-/*A simple text input activity that existing text as a StringExtra and returns updated
+/*A simple text input activity that receives existing text as a StringExtra and returns updated
  text to previous activity
  */
 public class EnterTextActivity extends AppCompatActivity {

@@ -31,6 +31,8 @@ public class AddRecipeActivity extends AppCompatActivity {
     private Button addRecipe;
     private ArrayList<String> ingredients = new ArrayList<String>();
 
+    private StringHelper help;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_recipe);
@@ -108,8 +110,8 @@ public class AddRecipeActivity extends AppCompatActivity {
         addIngredient.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                ingredients.add(ingredient.getText().toString() + ":" +
-                        quantity.getText().toString()+ " " + unit.getSelectedItem().toString());
+                ingredients.add(help.getEditTextString(ingredient) + ":" +
+                        help.getEditTextString(quantity)+ " " + help.getSpinnerString(unit));
                 ingredient.setText("");
                 quantity.setText("");
                 unit.setSelection(0);
