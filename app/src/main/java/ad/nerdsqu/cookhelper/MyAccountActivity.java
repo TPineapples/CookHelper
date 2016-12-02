@@ -21,8 +21,8 @@ public class MyAccountActivity extends AppCompatActivity {
         user = getIntent().getStringExtra("USER");
         name.setText(user);
 
+        //change password
         Button changePassword = (Button)findViewById(R.id.confirm_password_change);
-
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -34,6 +34,7 @@ public class MyAccountActivity extends AppCompatActivity {
                 String new_pass1 = new_password1_text.getText().toString();
                 String new_pass2 = new_password2_text.getText().toString();
 
+                //check if old password is correct and new passwords patch
                 if (MainActivity.helper.IsValidLogin(user, old_pass)) {
                     if (new_pass1.equals(new_pass2)) {
                         MainActivity.helper.setPassword(new_pass1,user);

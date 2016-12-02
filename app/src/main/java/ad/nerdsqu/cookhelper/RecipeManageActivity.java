@@ -17,6 +17,7 @@ public class RecipeManageActivity extends AppCompatActivity {
         Button edit = (Button)findViewById(R.id.bEditRecipe);
         Button delete = (Button)findViewById(R.id.bDelReicpe);
 
+        //edit recipe button
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -25,7 +26,7 @@ public class RecipeManageActivity extends AppCompatActivity {
                 startActivity(edit);
             }
         });
-        
+        //delete recipe button
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

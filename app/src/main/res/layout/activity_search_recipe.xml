@@ -66,6 +66,30 @@
             android:hint="@string/enterIngredients"
             android:layout_centerHorizontal="true" />
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:text="@string/addIngredient"
+                android:id="@+id/bAddSearchIngredient"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center_horizontal">
+
+            </Button>
+
+            <Button
+                android:text="@string/excludeIngredient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bExcludeIngredient"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -149,33 +173,17 @@
             android:layout_weight="0.28">
 
         </ScrollView>
-        <LinearLayout
-            android:layout_width="wrap_content"
+
+        <Button
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:text="@string/serach"
+            android:id="@+id/bSearchForRecipe"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center_horizontal">
 
-            <Button
-                android:layout_width="182dp"
-                android:layout_height="wrap_content"
-                android:text="@string/addIngredient"
-                android:id="@+id/bAddSearchIngredient"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="0.5">
+        </Button>
 
-            </Button>
-
-            <Button
-                android:layout_width="182dp"
-                android:layout_height="wrap_content"
-                android:text="@string/serach"
-                android:id="@+id/bSearchForRecipe"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="0.5">
-
-            </Button>
-        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

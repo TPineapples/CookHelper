@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -17,8 +18,9 @@ import java.util.ArrayList;
 
 public class SearchRecipeActivity extends AppCompatActivity {
 
-    private ArrayList<String> ingredients = new ArrayList<String>();
-    private EditText ingredientIn;
+    private ArrayList<String> ingredients = new ArrayList<>();
+    private ArrayList<String> excludedIngreds = new ArrayList<>();
+    private EditText ingredientInput;
     private EditText name;
     private Spinner category;
     private Spinner type;
@@ -28,7 +30,7 @@ public class SearchRecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_recipe);
 
-        ingredientIn = (EditText)findViewById(R.id.etAddIngredient);
+        ingredientInput = (EditText)findViewById(R.id.etAddIngredient);
         name = (EditText)findViewById(R.id.etSearchRecipeName);
         category = (Spinner)findViewById(R.id.spinCategory);
         type = (Spinner)findViewById(R.id.spinType);
@@ -38,18 +40,29 @@ public class SearchRecipeActivity extends AppCompatActivity {
         Button addIngredient = (Button) findViewById(R.id.bAddSearchIngredient);
         addIngredient.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                ingredients.add(help.getEditTextString(ingredientIn));
+                ingredients.add(help.getEditTextString(ingredientInput));
                 Toast.makeText(SearchRecipeActivity.this, "Ingredient Added", Toast.LENGTH_SHORT).show();
-                ingredientIn.setText("");
+                ingredientInput.setText("");
             }
         });
 
-
+        Button exclude = (Button)findViewById(R.id.bExcludeIngredient);
+        exclude.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                excludedIngreds.add(help.getEditTextString(ingredientInput));
+                Toast.makeText(SearchRecipeActivity.this, "Ingredient Excluded", Toast.LENGTH_SHORT).show();
+                ingredientInput.setText("");
+            }
+        });
+                
+        
         Button search = (Button)findViewById(R.id.bSearchForRecipe);
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                //(r)ecipe attribute strings
                 String rName = help.getEditTextString(name);
 
                 String rCategory = help.getSpinnerString(category);
@@ -60,12 +73,15 @@ public class SearchRecipeActivity extends AppCompatActivity {
 
                 ArrayList<Recipe> searchResult = new ArrayList<>();
 
+                //control booleans for search decision
                 boolean ingExists = !(rIngredients.length == 0);
                 boolean typeExists = !(rType.equals("")||rType.equals("Any"));
                 boolean categExists = !(rCategory.equals("")||rCategory.equals("All"));
 
                 Intent intent = new Intent(SearchRecipeActivity.this, RecipeListActivity.class);
 
+                //control which search is executed why checking which of ing(redient),
+                // type, or categ(ory) have been selected
                 if (!rName.equals("")) {
                     searchResult = MainActivity.helper.searchByName(rName);
                 } else {
@@ -102,6 +118,16 @@ public class SearchRecipeActivity extends AppCompatActivity {
                         Toast.makeText(SearchRecipeActivity.this, "Input Required", Toast.LENGTH_SHORT).show();
                     }
                 }
+
+                //remove any recipes with excluded ingredients
+                for (Recipe recipe : searchResult) {
+                    for (String ingred : excludedIngreds) {
+                        if (recipe.hasIngredient(ingred)) {
+                            searchResult.remove(recipe);
+                        }
+                    }
+                }
+                //get the names of all the recipes to send as a StringArrayExtra
                 String[] resultArray = new String[searchResult.size()];
                 for (int i = 0; i < searchResult.size(); i++) {
                     resultArray[i] = searchResult.get(i).getRecipeName();

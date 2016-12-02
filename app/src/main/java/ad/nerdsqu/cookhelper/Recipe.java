@@ -3,48 +3,49 @@ package ad.nerdsqu.cookhelper;
 
 
 public class Recipe {
-    String RecipeName;
-    String[] Ingredients;
-    String Cook_Time;
-    String Preparation_Time;
-    String Category;
-    String Recipe_Type;
+    String recipeName ;
+    String[] ingredients;
+    String cookTime;
+    String prepTime;
+    String category;
+    String recipeType;
     String Directions;
 
 
-    public Recipe(String Recipe, String[] Ingredients, String Preparation_Time, String Cook_Time, String Category, String Recipe_Type, String Directions) {
-        this.RecipeName = Recipe;
-        this.Ingredients = Ingredients;
-        this.Cook_Time = Cook_Time;
-        this.Preparation_Time = Preparation_Time;
-        this.Category = Category;
-        this.Recipe_Type = Recipe_Type;
+    public Recipe(String Recipe, String[] Ingredients, String prepTime,
+                  String cookTime, String category, String recipeType, String Directions) {
+        this.recipeName  = Recipe;
+        this.ingredients = Ingredients;
+        this.cookTime = cookTime;
+        this.prepTime = prepTime;
+        this.category = category;
+        this.recipeType = recipeType;
         this.Directions = Directions;
 
     }
 
-    public String getRecipeName() {
-        return RecipeName;
+    public String getRecipeName () {
+        return recipeName ;
     }
 
     public String[] getIngredients() {
-        return Ingredients;
+        return ingredients;
     }
 
     public String getIngredient(int i) {
-        return Ingredients[i];
+        return ingredients[i];
     }
 
-    public String getCook_Time() {
-        return Cook_Time;
+    public String getCookTime() {
+        return cookTime;
     }
 
-    public String getPreparation_Time() {
-        return Preparation_Time;
+    public String getPrepTime() {
+        return prepTime;
     }
 
-    public String getRecipe_Type() {
-        return Recipe_Type;
+    public String getRecipeType() {
+        return recipeType;
     }
 
     public String getDirections() {
@@ -52,32 +53,41 @@ public class Recipe {
     }
 
     public String getCategory() {
-        return Category;
+        return category;
     }
 
-
-    public void setRecipeName(String Recipe1) {
-        RecipeName = Recipe1;
+    public boolean hasIngredient(String ingredient) {
+        ingredient = ingredient.toLowerCase();
+        for (String ingred : ingredients) {
+            if (ingred.toLowerCase().contains(ingredient)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public void setRecipeName (String Recipe1) {
+        recipeName  = Recipe1;
     }
 
-    public void setIngredients(String[] Ingredients1) {
-        Ingredients = Ingredients1;
+    public void setIngredients(String[] ingredients1) {
+        ingredients = ingredients1;
     }
 
     public void setIngredient(int i, String newIngredient) {
-        Ingredients[i] = newIngredient;
+        ingredients[i] = newIngredient;
     }
 
-    public void setCook_Time(String new_Cook_Time) {
-        Cook_Time = new_Cook_Time;
+    public void setCookTime(String new_cookTime) {
+        cookTime = new_cookTime;
     }
 
-    public void setPreparation_Time(String new_Preparation_Time) {
-        Preparation_Time = new_Preparation_Time;
+    public void setPrepTime(String new_prepTime) {
+        prepTime = new_prepTime;
     }
 
-    public void setRecipe_Type(String Recipe_Type2) {
-        Recipe_Type = Recipe_Type2;
+    public void setRecipeType(String recipeType2) {
+        recipeType = recipeType2;
     }
 
     public void setDirections(String NewDirections) {
@@ -85,16 +95,16 @@ public class Recipe {
     }
 
     public void setCategory(String newCategory) {
-        Category = newCategory;
+        category = newCategory;
     }
 
     public String ConcatenateIngredientNames() {
         String ConcatenatedIngredients = "";
-        for (int i = 0; i < Ingredients.length; i++) {
-            if (i != Ingredients.length - 1) {
-                ConcatenatedIngredients += Ingredients[i] + ",";
+        for (int i = 0; i < ingredients.length; i++) {
+            if (i != ingredients.length - 1) {
+                ConcatenatedIngredients += ingredients[i] + ",";
             } else {
-                ConcatenatedIngredients += Ingredients[i];
+                ConcatenatedIngredients += ingredients[i];
             }
 
 
@@ -103,9 +113,9 @@ public class Recipe {
     }
 
 
-    public static String[] IngredientsStringToArray(String IngredientsString) {
-        String[] IngredientsArray = IngredientsString.split(",");
-        return IngredientsArray;
+    public static String[] IngredientsStringToArray(String ingredientsString) {
+        String[] ingredientsArray = ingredientsString.split(",");
+        return ingredientsArray;
 
 
     }
@@ -113,7 +123,7 @@ public class Recipe {
 
 
     public boolean equals(Recipe recipe) {
-        if (!this.RecipeName.equals(recipe.RecipeName)) {
+        if (!this.recipeName .equals(recipe.recipeName )) {
 
             return false;
         }
@@ -121,21 +131,21 @@ public class Recipe {
 
             return false;
         }
-        if (!this.Cook_Time.equals(recipe.getCook_Time()))    {
+        if (!this.cookTime.equals(recipe.getCookTime()))    {
 
             return false;
         }
 
-        if (! this.Preparation_Time.equals(recipe.getPreparation_Time())){
+        if (! this.prepTime.equals(recipe.getPrepTime())){
 
             return false;
         }
-        if (!this.Recipe_Type.equals(recipe.getRecipe_Type())) {
+        if (!this.recipeType.equals(recipe.getRecipeType())) {
 
             return false;
         }
 
-        if (!this.Category.equals(recipe.getCategory())) {
+        if (!this.category.equals(recipe.getCategory())) {
 
             return false;
         }
@@ -148,32 +158,29 @@ public class Recipe {
     }
 
     public boolean CompareIngredientsArray(Recipe recipe) {
-        if (this.Ingredients.length != recipe.Ingredients.length) {
+        if (this.ingredients.length != recipe.ingredients.length) {
 
             return false;
         }
-        for (int i = 0; i <this.Ingredients.length; i++ ) {
-            if (!this.Ingredients[i].equals( recipe.Ingredients[i])) {
+        for (int i = 0; i <this.ingredients.length; i++ ) {
+            if (!this.ingredients[i].equals( recipe.ingredients[i])) {
                 return false;
             }
 
         }
         return true;
-
-
+        
     }
     public String toString() {
         String toReturn = "";
-        toReturn += "Recipe Name: " + getRecipeName() + "\n";
+        toReturn += "Recipe Name: " + getRecipeName () + "\n";
         toReturn += "Ingredients: " + ConcatenateIngredientNames() + "\n";
-        toReturn += "Preparation_Time: " + getPreparation_Time() + "\n";
-        toReturn += "Cook_Time: " + getCook_Time() + "\n";
+        toReturn += "Preparation Time: " + getPrepTime() + "\n";
+        toReturn += "Cook Time: " + getCookTime() + "\n";
         toReturn += "Category: " + getCategory() + "\n";
-        toReturn += "Recipe Type: " + getRecipe_Type() + "\n";
+        toReturn += "Recipe Type: " + getRecipeType() + "\n";
         toReturn += "Directions: " + getDirections();
-
-
-
+        
         return toReturn;
     }
 }

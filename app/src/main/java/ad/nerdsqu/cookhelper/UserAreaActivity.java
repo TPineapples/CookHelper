@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Aaron on 11/27/2016.
+ * Handles the menu for selecting which activity to perform (Search, Add, Saved, Account)
  */
 
 public class UserAreaActivity extends AppCompatActivity {
@@ -42,6 +43,10 @@ public class UserAreaActivity extends AppCompatActivity {
             }
 
         });
+
+        /*gets the array of recipe names that will be needed to populate SavedRecipes list, then
+           start the activity with the array of names as a StringArrayExtra
+         */
         mySavedRecipes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(UserAreaActivity.this, RecipeListActivity.class);

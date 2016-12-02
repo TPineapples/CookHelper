@@ -141,7 +141,7 @@
     <string name="findRecipe">Find A Recipe</string>
     <string name="category">Select A Category</string>
     <string name="type">Select Type:</string>
-    <string name="enterIngredients">Enter the ingredients that you have</string>
+    <string name="enterIngredients">Enter an ingredient</string>
     <string name="account">Account Info:</string>
     <string name="accountUsername">Username:</string>
     <string name="changePassword">Change Password:</string>
@@ -187,6 +187,7 @@
     <string name="confirmDelete">Confirm Changes</string>
     <string name="longPressToManage">Long press recipe to edit/delete</string>>
     <string name="updateRecipe">Update Recipe</string>
+    <string name="excludeIngredient">Exclude Ingredient</string>
 
 
 </resources>

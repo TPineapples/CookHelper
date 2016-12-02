@@ -44,16 +44,16 @@ public class RecipeActivity extends AppCompatActivity {
             //calculate total time by splitting the string (<xx> minutes)
             //to extract the leading int <xx>
             String[] splitCook, splitPrep;
-            splitCook = recipe.getCook_Time().split(" ");
-            splitPrep = recipe.getPreparation_Time().split(" ");
+            splitCook = recipe.getCookTime().split(" ");
+            splitPrep = recipe.getPrepTime().split(" ");
             int totalTime = Integer.parseInt(splitCook[0]) +
                     Integer.parseInt(splitPrep[0]);
 
-            prep.setText(recipe.getPreparation_Time());
-            cook.setText(recipe.getCook_Time());
+            prep.setText(recipe.getPrepTime());
+            cook.setText(recipe.getCookTime());
             total.setText(totalTime + " minutes");
             category.setText(recipe.getCategory());
-            type.setText(recipe.getRecipe_Type());
+            type.setText(recipe.getRecipeType());
 
 
             String[] unformattedIngredients = recipe.getIngredients();

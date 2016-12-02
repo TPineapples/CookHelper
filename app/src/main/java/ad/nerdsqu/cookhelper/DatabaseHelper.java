@@ -119,10 +119,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(TABLE2_COL1, recipe.getRecipeName());
         String ConcatenatedIngredients = recipe.ConcatenateIngredientNames();
         values.put(TABLE2_COL2, ConcatenatedIngredients);
-        values.put(TABLE2_COL3, recipe.getPreparation_Time());
-        values.put(TABLE2_COL4, recipe.getCook_Time());
+        values.put(TABLE2_COL3, recipe.getPrepTime());
+        values.put(TABLE2_COL4, recipe.getCookTime());
         values.put(TABLE2_COL5, recipe.getCategory());
-        values.put(TABLE2_COL6, recipe.getRecipe_Type());
+        values.put(TABLE2_COL6, recipe.getRecipeType());
         values.put(TABLE2_COL7, recipe.getDirections());
         try {
             Db.insertOrThrow(TABLE2_NAME, null, values);
@@ -524,7 +524,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Set<String> StringList = new HashSet<String>();
         ListIterator<Recipe> it = RecipeList.listIterator();
         while (it.hasNext()) {
-            StringList.add(it.next().getRecipe_Type());
+            StringList.add(it.next().getRecipeType());
 
         }
         String[] TypeStrings = new String[StringList.size()];
@@ -649,10 +649,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(TABLE2_COL1, recipe.getRecipeName());
         String ConcatenatedIngredients = recipe.ConcatenateIngredientNames();
         values.put(TABLE2_COL2, ConcatenatedIngredients);
-        values.put(TABLE2_COL3, recipe.getPreparation_Time());
-        values.put(TABLE2_COL4, recipe.getCook_Time());
+        values.put(TABLE2_COL3, recipe.getPrepTime());
+        values.put(TABLE2_COL4, recipe.getCookTime());
         values.put(TABLE2_COL5, recipe.getCategory());
-        values.put(TABLE2_COL6, recipe.getRecipe_Type());
+        values.put(TABLE2_COL6, recipe.getRecipeType());
         values.put(TABLE2_COL7, recipe.getDirections());
         Db.update(TABLE2_NAME, values, TABLE2_COL1 + "=?", new String[]{recipe.getRecipeName()});
     }

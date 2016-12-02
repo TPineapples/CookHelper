@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 /**
  * Created by Aaron on 11/28/2016.
+ * Used to view directions fullscreen from the Recipe Activity
  */
 
 public class ViewDirectionsActivity extends AppCompatActivity {

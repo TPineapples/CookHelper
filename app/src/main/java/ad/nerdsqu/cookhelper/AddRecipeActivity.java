@@ -75,7 +75,7 @@ public class AddRecipeActivity extends AppCompatActivity {
             String[] typeArray = getResources().getStringArray(R.array.food_type);
 
             int categoryIndex = Arrays.asList(categoryArray).indexOf(recipe.getCategory());
-            int typeIndex = Arrays.asList(typeArray).indexOf(recipe.getRecipe_Type());
+            int typeIndex = Arrays.asList(typeArray).indexOf(recipe.getRecipeType());
 
             category.setSelection(categoryIndex);
             type.setSelection(typeIndex);
@@ -84,28 +84,28 @@ public class AddRecipeActivity extends AppCompatActivity {
 
             name.setText(recipe.getRecipeName());
 
-            String[] prepSplit = recipe.getPreparation_Time().split(" ");
+            String[] prepSplit = recipe.getPrepTime().split(" ");
             prepTime.setText(prepSplit[0]);
 
-            String[] cookSplit = recipe.getCook_Time().split(" ");
+            String[] cookSplit = recipe.getCookTime().split(" ");
             cookTime.setText(cookSplit[0]);
 
 
         }
 
-        final String origName = name.getText().toString();
+        final String origName = help.getEditTextString(name);
 
         //check for clicks on directions TextView to open a separate text input activity
         directions.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent getDirections = new Intent(AddRecipeActivity.this, EnterTextActivity.class);
-                getDirections.putExtra("CURRENT_TEXT", directions.getText().toString());
+                getDirections.putExtra("CURRENT_TEXT", help.getTextViewString(directions));
                 startActivityForResult(getDirections, 1);
             }
         });
 
 
-
+        //Add Ingredient button
         Button addIngredient = (Button) findViewById(R.id.bAddIngredient);
         addIngredient.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -119,7 +119,7 @@ public class AddRecipeActivity extends AppCompatActivity {
             }
         });
 
-
+        //Remove Ingredients button
         Button removeIngredients = (Button)findViewById(R.id.bRemoveIngredients);
         removeIngredients.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +133,7 @@ public class AddRecipeActivity extends AppCompatActivity {
             }
         });
 
-
+        //Add Recipe button
         addRecipe = (Button) findViewById(R.id.bAddRecipe);
         addRecipe.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -146,8 +146,8 @@ public class AddRecipeActivity extends AppCompatActivity {
                 String rName = help.getEditTextString(name);
                 String rDirections = help.getTextViewString(directions);
 
-                String rCookTime = cookTime.getText().toString() + " minutes";
-                String rPrepTime = prepTime.getText().toString() + " minutes";
+                String rCookTime = help.getEditTextString(cookTime) + " minutes";
+                String rPrepTime = help.getEditTextString(prepTime) + " minutes";
 
                 String[] ingredArray = new String[ingredients.size()];
                 ingredArray = ingredients.toArray(ingredArray);
