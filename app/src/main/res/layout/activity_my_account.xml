@@ -131,9 +131,7 @@
                     android:inputType="textPassword"
                     android:ems="10"
                     android:id="@+id/new_password1"
-                    android:textAlignment="viewStart"
-                    android:singleLine="false"
-                    android:allowUndo="false" />
+                    android:textAlignment="viewStart"/>
 
             </LinearLayout>
 

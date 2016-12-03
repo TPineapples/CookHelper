@@ -31,7 +31,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.25"
-        android:contextClickable="false"
         android:background="@drawable/drawable_rectangle">
 
         <LinearLayout
