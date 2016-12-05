@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(helper.IsValidLogin("Default", "Password1"));
 
 
+
         final EditText username = (EditText) findViewById(R.id.fieldUsername);
         final EditText password = (EditText) findViewById(R.id.fieldPassword);
         Button newAccount = (Button) findViewById(R.id.buttonRegister);
